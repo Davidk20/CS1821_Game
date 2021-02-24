@@ -19,7 +19,13 @@ class Game:
     def draw(self, canvas):
         self.player.draw(canvas)
 
-
+class Interaction:
+    def __init__(self, player, keyboard, movement):
+        self.player = player
+        self.keyboard = keyboard
+    
+    def update(self):
+        self.player.movement.check_input(self.keyboard)
 
 if __name__ == "__main__":
     Game()

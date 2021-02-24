@@ -23,6 +23,8 @@ class Player:
         self.coins = 0
         self.inventory = []
 
+        self.movement = Movement(self.speed, self.pos)
+
 
     def update(self):
         pass

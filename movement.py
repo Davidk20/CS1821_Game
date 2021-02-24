@@ -34,4 +34,12 @@ class Movement:
       self.pos_vector.add(Vector(0, -speed))
       pass
 
-
+  def check_input(self, keyboard):
+    if keyboard.left == True:
+      self.move_horizontal(-1)
+    elif keyboard.right == True:
+      self.move_horizontal(1)
+    elif keyboard.up == True:
+      self.move_vertical(1)
+    elif keyboard.down == True:
+      self.move_vertical(-1)
