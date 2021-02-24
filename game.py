@@ -4,12 +4,15 @@ except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from player import Player
-
+from keyboard import Keyboard
 
 class Game:
     def __init__(self):
         self.player = Player(30, 350)
+        self.kbd = Keyboard()
         frame = simplegui.create_frame("Game", 700 , 700)
+        frame.set_keydown_handler(self.kbd.keyDown)
+        frame.set_keyup_handler(self.kbd.keyUp)
         frame.set_draw_handler(self.draw)
         frame.start()
 
