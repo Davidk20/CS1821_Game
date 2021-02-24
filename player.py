@@ -24,6 +24,8 @@ class Player:
         self.inventory = []
 
 
+    def update(self):
+        pass
 
     def draw(self, canvas):
         canvas.draw_circle(self.pos.get_p(),
