@@ -12,7 +12,7 @@ class Game:
         self.kbd = Keyboard()
         self.interaction = Interaction(self.player, self.kbd)
 
-        frame = simplegui.create_frame("Game", 700 , 700)
+        frame = simplegui.create_frame("Game", 700 , 700, 0)
         frame.set_canvas_background("#534a32")
         frame.set_keydown_handler(self.kbd.keyDown)
         frame.set_keyup_handler(self.kbd.keyUp)
