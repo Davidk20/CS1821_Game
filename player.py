@@ -17,7 +17,7 @@ class Player:
 
         self.max_health = 100
         self.current_health = self.max_health
-        self.speed = 1
+        self.speed = 2
         self.lives = 3
         self.score = 0
         self.coins = 0
