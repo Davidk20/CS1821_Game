@@ -16,11 +16,9 @@ class Movement:
     Direction: 1 = move right
     """
     if direction < 0:
-      self.pos_vector.add(Vector(-speed, 0)) 
-      pass
+      self.pos_vector.add(Vector(-self.speed, 0)) 
     elif direction > 0:
-      self.pos_vector.add(Vector(speed, 0)) 
-      pass
+      self.pos_vector.add(Vector(self.speed, 0)) 
 
   def move_vertical(self, direction):
     """
@@ -28,11 +26,9 @@ class Movement:
     Direction: 1 = move up
     """
     if direction > 0:
-      self.pos_vector.add(Vector(0, speed)) 
-      pass
+      self.pos_vector.add(Vector(0, -self.speed)) 
     elif direction < 0:
-      self.pos_vector.add(Vector(0, -speed))
-      pass
+      self.pos_vector.add(Vector(0, self.speed))
 
   def check_input(self, keyboard):
     if keyboard.left == True:

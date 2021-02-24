@@ -27,9 +27,10 @@ class Player:
 
 
     def update(self):
-        pass
+        self.pos = self.movement.pos_vector
 
     def draw(self, canvas):
+        self.update()
         canvas.draw_circle(self.pos.get_p(),
                 self.radius ,
                 self.border,

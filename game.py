@@ -10,6 +10,8 @@ class Game:
     def __init__(self):
         self.player = Player(30, 350)
         self.kbd = Keyboard()
+        self.interaction = Interaction(self.player, self.kbd)
+
         frame = simplegui.create_frame("Game", 700 , 700)
         frame.set_keydown_handler(self.kbd.keyDown)
         frame.set_keyup_handler(self.kbd.keyUp)
@@ -18,9 +20,10 @@ class Game:
 
     def draw(self, canvas):
         self.player.draw(canvas)
+        self.interaction.update()
 
 class Interaction:
-    def __init__(self, player, keyboard, movement):
+    def __init__(self, player, keyboard):
         self.player = player
         self.keyboard = keyboard
     
