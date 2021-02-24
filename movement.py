@@ -33,3 +33,5 @@ class Movement:
     elif direction < 0:
       self.pos_vector.add(Vector(0, -speed))
       pass
+
+
