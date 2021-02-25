@@ -17,9 +17,9 @@ class Movement:
     Direction: 1 = move right
     """
     if direction < 0:
-      self.vel_vector.add(Vector(-self.speed, self.vel_vector.y))
+      self.vel_vector.add(Vector(-self.speed, self.vel_vector.y)) #move left
     elif direction > 0:
-      self.vel_vector.add(Vector(self.speed, self.vel_vector.y)) 
+      self.vel_vector.add(Vector(self.speed, self.vel_vector.y)) #move right
 
   def move_vertical(self, direction):
     """
@@ -27,9 +27,9 @@ class Movement:
     Direction: 1 = move up
     """
     if direction > 0:
-      self.vel_vector.add(Vector(self.vel_vector.x, -self.speed)) 
+      self.vel_vector.add(Vector(self.vel_vector.x, -self.speed)) #move down
     elif direction < 0:
-      self.vel_vector.add(Vector(self.vel_vector.x, self.speed))
+      self.vel_vector.add(Vector(self.vel_vector.x, self.speed)) #move up
 
   def update(self):
     self.pos_vector.add(self.vel_vector)

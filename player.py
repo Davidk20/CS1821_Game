@@ -28,13 +28,13 @@ class Player:
     
     def check_input(self, keyboard):
         if keyboard.left == True:
-            self.movement.move_horizontal(-1)
+            self.movement.move_horizontal(-1) #move left
         elif keyboard.right == True:
-            self.movement.move_horizontal(1)
+            self.movement.move_horizontal(1) #move right
         elif keyboard.up == True:
-            self.movement.move_vertical(1)
+            self.movement.move_vertical(1) #move up
         elif keyboard.down == True:
-            self.movement.move_vertical(-1)
+            self.movement.move_vertical(-1) #move down
 
     def update(self):
         self.movement.update()
