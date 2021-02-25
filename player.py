@@ -37,6 +37,7 @@ class Player:
             self.movement.move_vertical(-1)
 
     def update(self):
+        self.movement.update()
         self.pos = self.movement.pos_vector
 
     def draw(self, canvas):
