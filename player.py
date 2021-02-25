@@ -25,6 +25,16 @@ class Player:
 
         self.movement = Movement(self.speed, self.pos)
 
+    
+    def check_input(self, keyboard):
+        if keyboard.left == True:
+            self.movement.move_horizontal(-1)
+        elif keyboard.right == True:
+            self.movement.move_horizontal(1)
+        elif keyboard.up == True:
+            self.movement.move_vertical(1)
+        elif keyboard.down == True:
+            self.movement.move_vertical(-1)
 
     def update(self):
         self.pos = self.movement.pos_vector

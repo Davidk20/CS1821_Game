@@ -29,7 +29,7 @@ class Interaction:
         self.keyboard = keyboard
     
     def update(self):
-        self.player.movement.check_input(self.keyboard)
+        self.player.check_input(self.keyboard)
 
 if __name__ == "__main__":
     Game()
