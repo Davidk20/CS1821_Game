@@ -1,0 +1,50 @@
+Classes:
+
+-Collision
+-Movement (init: position_vector)
+
+-Projectile (init: location, velocity, size)
+	--Uses:
+		Collision (hit detection and terrain)
+	--Carries over momentum from player
+	--Creates circle using size as radius
+
+-Player (init: health, location)
+	--Uses:
+		Collision (obstacles in terrain)
+		Movement(WASD keys which translate into movement along the 2d plane)
+	--Attack (Fires projectile using arrow keys to identify direction)
+
+-Enemy (init: health, location)
+	--Uses:
+		Collision (Stops enemies from walking through terrain and enables the player to hit them)
+		Movement (to change and also make patrol lines)
+		Room (Must be integrated to plot out passive and offensive routes)
+	--Attack (tests through Collision if they have collided with the player sprite)
+
+-Hud(init: Score, Health, Pickups)
+	--Uses:
+		Player
+		Room
+	
+-Room (init: room_entrance)
+	--Pickup (Will appear randomly; not a priority to develop)
+	--Generates terrain that is not going to obstruct the player from moving from one door to another
+	
+-Props (init: sprite, position)
+	--
+
+-Game Director(Initiates new games)
+	-- this would also initialize all of the classes with parameters
+	--def draw(Canvas)
+		--- Room.draw()
+		
+			loop:
+		--- Enemy.draw()
+		
+		--- Player.draw()
+		--- Hud.draw()
+		
+		
+Other specifications:
+	-For the resolution of 720x720 the hud would be a rectangle from (0, 0) to (720, 100)
