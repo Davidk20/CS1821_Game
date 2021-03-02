@@ -6,11 +6,10 @@ except ImportError :
 from vector import Vector
 
 class Movement:
-  def __init__(self, speed, pos_vector):
+  def __init__(self, speed, pos_vector, patrol_points = None):
     self.speed = speed
     self.pos_vector = pos_vector
     self.vel_vector = Vector()
-
     self.patrol_points = patrol_points
 
   def move_horizontal(self, direction):
