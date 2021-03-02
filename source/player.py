@@ -44,13 +44,11 @@ class Player:
         self.update()
         canvas.draw_image(
             self.image,
-            
+            (16,16),
+            (32,32),
+            self.pos.get_p(),
+            (32,32)
         )
-        canvas.draw_circle(self.pos.get_p(),
-                self.radius ,
-                self.border,
-                self.color,
-                self.color)
 
 
     #add/remove functions for all values
