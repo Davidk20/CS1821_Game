@@ -4,14 +4,16 @@ except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from movement import Movement
+from vector import Vector
 
 class Enemy:
   def __init__(self, radius, speed, init_pos):
     self.radius = radius
     self.speed = speed
-    self.pos = init_pos #sets the initial position of the enemy.
+    self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
     self.in_collision = False
     self.movement = Movement(self.speed, self.pos)
+    self.color = "red"
 
     self.health = 100
     self.damage = 20

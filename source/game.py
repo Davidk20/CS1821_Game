@@ -5,10 +5,12 @@ except ImportError :
 
 from player import Player
 from keyboard import Keyboard
+from enemy import Enemy
 
 class Game:
     def __init__(self):
-        self.player = Player(30, 350)
+        self.player = Player(30, [350,350])
+        self.enemy = Enemy(30, 1, [111,111])
         self.kbd = Keyboard()
         self.interaction = Interaction(self.player, self.kbd)
         self.game_window_setup()
@@ -26,6 +28,7 @@ class Game:
     #Function handling drawing of all shapes on screen
     def draw(self, canvas):
         self.player.draw(canvas)
+        self.enemy.draw(canvas)
         self.interaction.update()
 
 

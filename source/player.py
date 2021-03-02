@@ -7,10 +7,9 @@ from vector import Vector
 from movement import Movement
 
 class Player:
-    def __init__(self, radius, centre):
+    def __init__(self, radius, init_pos):
         self.radius = radius
-        self.game_centre = centre
-        self.pos = Vector(centre,centre)
+        self.pos = Vector(init_pos[0],init_pos[1])
         self.border = 1
         self.color = "white"
         self.in_collision = False
