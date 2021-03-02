@@ -5,14 +5,15 @@ except ImportError :
 
 from vector import Vector
 from movement import Movement
+import os
+
 
 class Player:
-    def __init__(self, radius, init_pos):
-        self.image = simplegui.load_image("..\images\player.png")
-        self.radius = radius
+    def __init__(self, init_pos):
+        cwd = os.getcwd()
+        cwd = cwd + "\images\player.png"
+        self.image = simplegui.load_image(cwd)
         self.pos = Vector(init_pos[0],init_pos[1])
-        self.border = 1
-        self.color = "white"
         self.in_collision = False
 
         self.speed = 2
@@ -44,10 +45,10 @@ class Player:
         self.update()
         canvas.draw_image(
             self.image,
-            (16,16),
-            (32,32),
-            self.pos.get_p(),
-            (32,32)
+             (16, 16),
+             (32, 32),
+             self.pos.get_p(), 
+             (64,64)
         )
 
 

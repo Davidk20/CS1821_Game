@@ -6,15 +6,17 @@ except ImportError :
 from movement import Movement
 from vector import Vector
 from enemy_movement import EnemyMovement
+import os
 
 class Enemy:
     def __init__(self, radius, speed, init_pos):
-        self.radius = radius
+        cwd = os.getcwd()
+        cwd = cwd + "\images\\basic_enemy.png"
+        self.image = simplegui.load_image(cwd)
         self.speed = speed
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.in_collision = False
         self.movement = EnemyMovement(self.speed, self.pos, patrol_points=[Vector(0, 0), Vector(700, 0), Vector(700, 700), Vector(0, 700)])
-        self.color = "red"
 
         self.health = 100
         self.damage = 20
@@ -28,11 +30,13 @@ class Enemy:
     #function to draw the enemy
     def draw(self, canvas):
         self.update()
-        canvas.draw_circle(self.pos.get_p(),
-                self.radius ,
-                1,
-                self.color,
-                self.color)
+        canvas.draw_image(
+            self.image,
+            (16,16),
+            (32,32),
+            self.pos.get_p(),
+            (64,64)
+        )
 
     def remove_health(self, amount):
         self.health -= amount
