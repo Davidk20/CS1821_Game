@@ -6,7 +6,7 @@ except ImportError :
 from vector import Vector
 
 class Movement:
-    def __init__(self, speed, pos_vector, patrol_points = None):
+    def __init__(self, speed, pos_vector):
         self.speed = speed
         self.pos_vector = pos_vector
         self.vel_vector = Vector()
