@@ -15,13 +15,13 @@ class Enemy:
         self.in_collision = False
         self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 0))
         self.color = "red"
-
+        self.border = 1
         self.health = 100
         self.damage = 20
 
      #updates values regarding enemy position
     def update(self):
-        self.movement.move_towards_target((0, 0))
+        self.movement.move_towards_target((69, 69))
         self.movement.update()
         self.pos = self.movement.pos_vector
 

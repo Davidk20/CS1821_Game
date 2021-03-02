@@ -8,6 +8,7 @@ from movement import Movement
 
 class Player:
     def __init__(self, radius, init_pos):
+        self.image = simplegui.load_image("..\images\player.png")
         self.radius = radius
         self.pos = Vector(init_pos[0],init_pos[1])
         self.border = 1
@@ -41,6 +42,10 @@ class Player:
     #function to draw the player
     def draw(self, canvas):
         self.update()
+        canvas.draw_image(
+            self.image,
+            
+        )
         canvas.draw_circle(self.pos.get_p(),
                 self.radius ,
                 self.border,
