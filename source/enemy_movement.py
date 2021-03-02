@@ -15,8 +15,8 @@ class EnemyMovement (Movement):
 
     # Moves the enemy towards a particular target.
     def move_towards_target(self, target):
-        delta_x = target.x - self.pos_vector.x
-        delta_y = target.y - self.pos_vector.y 
+        delta_x = target[0] - self.pos_vector.x
+        delta_y = target[1] - self.pos_vector.y 
 
         target_vector = Vector(delta_x, delta_y).normalize()
         self.vel_vector.add(target_vector)
