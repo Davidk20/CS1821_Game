@@ -10,10 +10,7 @@ class Movement:
     self.speed = speed
     self.pos_vector = pos_vector
     self.vel_vector = Vector()
-<<<<<<< HEAD
-=======
     self.patrol_points = patrol_points
->>>>>>> 105fc85efa0cbafed5a0c6943de7cdd167e1bb2a
 
   def move_horizontal(self, direction):
     """

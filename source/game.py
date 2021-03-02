@@ -10,7 +10,7 @@ from enemy import Enemy
 class Game:
     def __init__(self):
         self.player = Player(30, [350,350])
-        self.enemy = Enemy(30, 1, [111,111],[1,2,3,4])
+        self.enemy = Enemy(30, 1, [111,111])
         self.kbd = Keyboard()
         self.interaction = Interaction(self.player, self.kbd)
         self.game_window_setup()
