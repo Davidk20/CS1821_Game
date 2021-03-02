@@ -11,8 +11,6 @@ class Movement:
     self.pos_vector = pos_vector
     self.vel_vector = Vector()
 
-    self.patrol_points = patrol_points
-
   def move_horizontal(self, direction):
     """
     Direction: -1 = move left

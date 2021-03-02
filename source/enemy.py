@@ -20,6 +20,7 @@ class Enemy:
 
      #updates values regarding enemy position
     def update(self):
+        self.movement.move_towards_target()
         self.movement.update()
         self.pos = self.movement.pos_vector
 
