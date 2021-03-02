@@ -13,7 +13,7 @@ class Enemy:
         self.speed = speed
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.in_collision = False
-        self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 600))
+        self.movement = EnemyMovement(self.speed, self.pos, patrol_points=[Vector(0, 0), Vector(700, 0), Vector(700, 700), Vector(0, 700)])
         self.color = "red"
 
         self.health = 100
@@ -21,8 +21,8 @@ class Enemy:
 
      #updates values regarding enemy position
     def update(self):
-        self.movement.move_towards_target()
-        self.movement.update()
+        self.movement.patrol() # patrols enemy between a set of points
+        self.movement.update() # updates enemy position
         self.pos = self.movement.pos_vector
 
     #function to draw the enemy
