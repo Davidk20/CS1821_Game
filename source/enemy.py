@@ -8,16 +8,16 @@ from vector import Vector
 from enemy_movement import EnemyMovement
 
 class Enemy:
-  def __init__(self, radius, speed, init_pos):
-    self.radius = radius
-    self.speed = speed
-    self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
-    self.in_collision = False
-    self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 0))
-    self.color = "red"
+    def __init__(self, radius, speed, init_pos):
+      self.radius = radius
+      self.speed = speed
+      self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
+      self.in_collision = False
+      self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 0))
+      self.color = "red"
 
-    self.health = 100
-    self.damage = 20
+      self.health = 100
+      self.damage = 20
 
      #updates values regarding enemy position
     def update(self):
@@ -35,6 +35,6 @@ class Enemy:
                 self.color)
 
     def remove_health(self, amount):
-      self.health -= amount
+        self.health -= amount
 
     
