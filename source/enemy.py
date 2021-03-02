@@ -13,7 +13,7 @@ class Enemy:
         self.speed = speed
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.in_collision = False
-        self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 0))
+        self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 600))
         self.color = "red"
 
         self.health = 100
@@ -21,7 +21,7 @@ class Enemy:
 
      #updates values regarding enemy position
     def update(self):
-        self.movement.move_towards_target((0, 0))
+        self.movement.move_towards_target()
         self.movement.update()
         self.pos = self.movement.pos_vector
 
@@ -30,7 +30,7 @@ class Enemy:
         self.update()
         canvas.draw_circle(self.pos.get_p(),
                 self.radius ,
-                self.border,
+                1,
                 self.color,
                 self.color)
 
