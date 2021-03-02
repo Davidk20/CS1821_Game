@@ -7,9 +7,8 @@ from movement import Movement
 from vector import Vector
 
 class EnemyMovement (Movement):
-  def __init__(self, speed, pos_vector, patrol_points = [], target = None):
+  def __init__(self, speed, pos_vector, patrol_points = None, target = None):
     super(speed, pos_vector)
-
     self.current_point = 0
     self.patrol_points = patrol_points # None by default
     self.target = target # None by default

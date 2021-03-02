@@ -5,6 +5,7 @@ except ImportError :
 
 from movement import Movement
 from vector import Vector
+from enemy_movement import EnemyMovement
 
 class Enemy:
   def __init__(self, radius, speed, init_pos):
@@ -12,7 +13,7 @@ class Enemy:
     self.speed = speed
     self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
     self.in_collision = False
-    self.movement = Movement(self.speed, self.pos)
+    self.movement = EnemyMovement(self.speed, self.pos, target=Vector(0, 0))
     self.color = "red"
 
     self.health = 100
