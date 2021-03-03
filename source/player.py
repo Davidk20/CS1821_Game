@@ -12,6 +12,7 @@ class Player:
     def __init__(self, init_pos):
         cwd = os.getcwd()
         cwd = cwd + "\images\player.png"
+        cwd = cwd.replace(" ", "\ ")
         self.image = simplegui.load_image(cwd)
         self.pos = Vector(init_pos[0],init_pos[1])
         self.in_collision = False

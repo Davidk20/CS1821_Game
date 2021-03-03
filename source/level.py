@@ -97,7 +97,7 @@ class Interaction:
 level_start = Level(LEVEL_GRID_CENTRE)
 level_1 = Level(LEVEL_GRID_1)
 level_2 = Level(LEVEL_GRID_2)
-interaction = Interaction(level_2)
+interaction = Interaction(level_1)
 
 frame = simplegui.create_frame("My Level", WIDTH, HEIGHT)
 frame.set_draw_handler(interaction.draw)
