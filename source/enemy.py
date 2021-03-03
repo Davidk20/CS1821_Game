@@ -10,7 +10,7 @@ import os
 
 class Enemy:
     def __init__(self, radius, speed, init_pos):
-        self.image = simplegui._load_local_image("images\basic_enemy.png")
+        self.image = simplegui._load_local_image("images\\basic_enemy.png")
         self.speed = speed
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.in_collision = False
