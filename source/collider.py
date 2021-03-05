@@ -35,6 +35,9 @@ class Collider:
         self.collisionList = []
 
     def hit(self, collider):
+        # collisions with walls are handled by the wall, this allows .hit() to be called on colliders with wall colliders without writing the wall collision code in the regular collider as well
+        if collider.shape == "wall":
+            return collider.hit(self)
         if self.shape == circ:
             if collider.shape == rect:
                 return collider.hit(self)
