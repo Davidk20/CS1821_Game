@@ -25,10 +25,13 @@ class Projectile:
             return False
 
     def get_vector(self, direction):
-        coords = self.pos.get_p()
-        x = 10 * math.cos(math.degrees(direction)) #+ int(coords[0])
-        y = 10 * math.sin(math.degrees(direction)) #+ int(coords[1])
-        return Vector(x, y)
+        
+        print(math.degrees(direction))
+
+        x = 10 * math.cos(math.degrees(direction-90))
+        y = 10 * math.sin(math.degrees(direction-90))
+        test = 10 * math.tan(math.degrees(direction-90))
+        return Vector(test, test)
 
 
     def draw(self, canvas):

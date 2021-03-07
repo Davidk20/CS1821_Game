@@ -33,7 +33,7 @@ class Enemy:
             (16,16),
             (32,32),
             self.pos.get_p(),
-            (64,64)
+            (32,32)
         )
 
     def remove_health(self, amount):

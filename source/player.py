@@ -28,7 +28,7 @@ class Player:
     #function to check and control player movement
     def check_input(self, keyboard):
         if keyboard.left == True:
-            self.rotation = -math.pi/2
+            self.rotation = 3 * (math.pi/2)
             self.movement.move_horizontal(-1) #move left
         if keyboard.right == True:
             self.rotation = math.pi/2
@@ -89,7 +89,7 @@ class Player:
              (16, 16),
              (32, 32),
              self.pos.get_p(), 
-             (64,64),
+             (32,32),
              self.rotation
         )
 
