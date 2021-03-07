@@ -10,7 +10,7 @@ import os
 
 class Player:
     def __init__(self, init_pos):
-        self.image = simplegui._load_local_image("images\player.png")
+        self.image = simplegui._load_local_image("images/player.png")
         self.pos = Vector(init_pos[0],init_pos[1])
         self.in_collision = False
 
