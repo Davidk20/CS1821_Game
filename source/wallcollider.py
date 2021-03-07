@@ -1,4 +1,4 @@
-from vector.py import Vector
+from vector import Vector
 
 
 class WallCollider:
