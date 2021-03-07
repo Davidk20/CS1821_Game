@@ -9,6 +9,7 @@ class Keyboard:
         self.right = False
         self.up = False
         self.down = False
+        self.space = False
 
     def keyDown(self, key):
         if key == simplegui.KEY_MAP['a'] or key == simplegui.KEY_MAP['left']:
@@ -19,6 +20,8 @@ class Keyboard:
             self.up = True
         elif key == simplegui.KEY_MAP['s'] or key == simplegui.KEY_MAP['down']:
             self.down = True
+        elif key == simplegui.KEY_MAP['space']:
+            self.space = True
 
     def keyUp(self, key):
         if key == simplegui.KEY_MAP['a'] or key == simplegui.KEY_MAP['left']:
@@ -29,5 +32,7 @@ class Keyboard:
             self.up = False
         elif key == simplegui.KEY_MAP['s'] or key == simplegui.KEY_MAP['down']:
             self.down = False
+        elif key == simplegui.KEY_MAP['space']:
+            self.space = False
         
     
