@@ -48,6 +48,31 @@ class Player:
                 )
             self.bullets.append(fire)
 
+    def rotate(self):
+        """
+        Rotates the player based off their velocity vector.
+        """
+        vel_vector = self.movement.vel_vector
+
+        if vel_vector.x > 0.1: # Moving right
+            self.rotation = math.pi / 2
+
+            if vel_vector.y > 0.1: # Moving down right
+                self.rotation = (3/4) * math.pi
+            elif vel_vector.y < -0.1: # Moving down left
+                self.rotation = math.pi / 4
+        elif vel_vector.x < -0.1: # Moving left
+            self.rotation = (3/2) * math.pi
+
+            if vel_vector.y > 0.1: # Moving down left
+                self.rotation = (5/4) * math.pi
+            elif vel_vector.y < -0.1: # Moving up left
+                self.rotation = (7/4) * math.pi
+        elif vel_vector.y > 0.1: # Moving down
+            self.rotation = math.pi
+        elif vel_vector.y < -0.1: # Moving up
+            self.rotation = 0
+
     #updates values regarding player position
     def update(self):
         self.movement.update()

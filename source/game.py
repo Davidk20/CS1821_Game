@@ -41,6 +41,7 @@ class Interaction:
     
     def update(self):
         self.player.check_input(self.keyboard)
+        self.player.rotate() # Rotates the player every frame.
 
 if __name__ == "__main__":
     Game()
