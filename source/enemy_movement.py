@@ -18,6 +18,9 @@ class EnemyMovement (Movement):
         delta_x = self.target.x - self.pos_vector.x # difference in x plane
         delta_y = self.target.y - self.pos_vector.y # difference in y plane
 
+        if delta_x == 0 and delta_y == 0:
+            return
+
         target_vector = Vector(delta_x, delta_y).normalize() # normalised vector from delta x & delta y
         self.vel_vector.add(target_vector)
 
@@ -37,3 +40,6 @@ class EnemyMovement (Movement):
             if round(self.pos_vector.x) == self.patrol_points[self.current_point].x and round(self.pos_vector.y) == self.patrol_points[self.current_point].y:
                 print("Reached a patrol point!")
                 self.current_point += 1
+
+    def set_target(self):
+        self.target = self.patrol_points[self.current_point]

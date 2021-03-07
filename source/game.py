@@ -12,7 +12,7 @@ import maps
 class Game:
     def __init__(self):
         self.player = Player([350,350])
-        self.enemy = Enemy(30, 1, [50,50])
+        self.enemy = Enemy(30, 1, [210, 210])
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
         self.kbd = Keyboard()

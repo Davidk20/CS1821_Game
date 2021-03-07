@@ -14,7 +14,7 @@ class Enemy:
         self.speed = speed
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.in_collision = False
-        self.movement = EnemyMovement(self.speed, self.pos, patrol_points=[Vector(0, 0), Vector(700, 0), Vector(700, 700), Vector(0, 700)])
+        self.movement = EnemyMovement(self.speed, self.pos, patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])
 
         self.health = 100
         self.damage = 20
