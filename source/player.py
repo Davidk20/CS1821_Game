@@ -30,16 +30,16 @@ class Player:
         if keyboard.left == True:
             self.rotation = -math.pi/2
             self.movement.move_horizontal(-1) #move left
-        elif keyboard.right == True:
+        if keyboard.right == True:
             self.rotation = math.pi/2
             self.movement.move_horizontal(1) #move right
-        elif keyboard.up == True:
+        if keyboard.up == True:
             self.rotation = 0
             self.movement.move_vertical(1) #move up
-        elif keyboard.down == True:
+        if keyboard.down == True:
             self.rotation = math.pi
             self.movement.move_vertical(-1) #move down
-        elif keyboard.space == True:
+        if keyboard.space == True:
             fire = Projectile(
                 self.pos,
                 self.rotation,

@@ -31,6 +31,21 @@ class Movement:
         elif direction < 0:
           self.vel_vector.add(Vector(self.vel_vector.x, self.speed)) #move up
 
+    def check_out_range(self, value):
+        """
+        A clamping function which will ensure that the speed of the player does not exist the defined
+        speed variable.
+        """
+
+        if value > self.speed:
+            return self.speed
+        elif value < -self.speed:
+            return -self.speed
+        else:
+            return value
+
     def update(self):
+        self.vel_vector = Vector(self.check_out_range(self.vel_vector.x), self.check_out_range(self.vel_vector.y))
+
         self.pos_vector.add(self.vel_vector)
         self.vel_vector.multiply(0.3) #Dampens movement when coming to stop
