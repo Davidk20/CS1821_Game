@@ -8,7 +8,7 @@ import math
 
 class Projectile:
     def __init__(self, init_pos, player_direction, radius, color):
-        self.pos = init_pos
+        self.pos = Vector(init_pos[0], init_pos[1])
         #initial position - Type = Vector
         self.vel = self.get_vector(player_direction)
         #player_direction - Type = angle (rads)
@@ -25,8 +25,9 @@ class Projectile:
             return False
 
     def get_vector(self, direction):
-        x = 700 * math.cos(math.degrees(direction))
-        y = 700 * math.sin(math.degrees(direction))
+        coords = self.pos.get_p()
+        x = 10 * math.cos(math.degrees(direction)) #+ int(coords[0])
+        y = 10 * math.sin(math.degrees(direction)) #+ int(coords[1])
         return Vector(x, y)
 
 
@@ -36,7 +37,7 @@ class Projectile:
         else:
             self.update()
             canvas.draw_circle(
-                self.pos,
+                self.pos.get_p(),
                 self.radius,
                 1,
                 self.color,

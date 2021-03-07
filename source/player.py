@@ -41,9 +41,9 @@ class Player:
             self.movement.move_vertical(-1) #move down
         elif keyboard.space == True:
             fire = Projectile(
-                self.pos,
+                self.pos.get_p(),
                 self.rotation,
-                2,
+                4,
                 "blue"
                 )
             self.bullets.append(fire)
