@@ -8,6 +8,16 @@ import math
 
 class Projectile:
     def __init__(self, init_pos, player_direction, radius, color):
+        self.vectors = {
+            0.0:Vector(0,-1),
+            45.0:Vector(1,-1),
+            90.0:Vector(1,0),
+            135.0:Vector(1,1),
+            180.0:Vector(0,1),
+            225.0:Vector(-1,1),
+            270.0:Vector(-1,0),
+            315.0:Vector(-1,-1)
+            }
         self.pos = Vector(init_pos[0], init_pos[1])
         #initial position - Type = Vector
         self.vel = self.get_vector(player_direction)
@@ -25,13 +35,8 @@ class Projectile:
             return False
 
     def get_vector(self, direction):
-        
-        print(math.degrees(direction))
-
-        x = 10 * math.cos(math.degrees(direction-90))
-        y = 10 * math.sin(math.degrees(direction-90))
-        test = 10 * math.tan(math.degrees(direction-90))
-        return Vector(test, test)
+        new_vector = self.vectors[math.degrees(direction)]
+        return new_vector.multiply(10)
 
 
     def draw(self, canvas):

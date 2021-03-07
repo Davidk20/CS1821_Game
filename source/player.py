@@ -15,7 +15,9 @@ class Player:
         self.pos = Vector(init_pos[0],init_pos[1])
         self.in_collision = False
         self.rotation = 0
-
+        self.time = 0
+        
+        self.shoot = True
         self.speed = 2
         self.lives = 3
         self.score = 0
@@ -28,18 +30,16 @@ class Player:
     #function to check and control player movement
     def check_input(self, keyboard):
         if keyboard.left == True:
-            self.rotation = 3 * (math.pi/2)
             self.movement.move_horizontal(-1) #move left
         if keyboard.right == True:
-            self.rotation = math.pi/2
             self.movement.move_horizontal(1) #move right
         if keyboard.up == True:
-            self.rotation = 0
             self.movement.move_vertical(1) #move up
         if keyboard.down == True:
-            self.rotation = math.pi
             self.movement.move_vertical(-1) #move down
-        if keyboard.space == True:
+        if keyboard.space == True and self.shoot:
+            self.last_shot_time = self.time
+            self.shoot = False
             fire = Projectile(
                 self.pos.get_p(),
                 self.rotation,
@@ -77,12 +77,21 @@ class Player:
     def update(self):
         self.movement.update()
         self.pos = self.movement.pos_vector
+        self.time += 1
+        if self.shoot == False and self.time - self.last_shot_time >= 20:
+            self.shoot = True
 
     #function to draw the player
     def draw(self, canvas):
         self.update()
+        destroy = []
         for i in self.bullets:
-            i.draw(canvas)
+            if i.out_of_bounds():
+                destroy.append(i)
+            else:
+                i.draw(canvas)
+        for i in destroy:
+            self.bullets.remove(i)
 
         canvas.draw_image(
             self.image,
