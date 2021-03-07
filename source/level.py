@@ -3,65 +3,20 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-WIDTH = 720
-HEIGHT = 720
-
-WALL = 1
-
-LEVEL_GRID_CENTRE = [
-    [ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-    [ 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1],
-    [ 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
-    [ 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-    [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [ 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-    [ 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
-    [ 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1],
-    [ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1]
-]
-
-LEVEL_GRID_1 = [
-    [ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [ 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
-    [ 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1],
-    [ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [ 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
-    [ 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
-    [ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-    [ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1]
-]
-
-LEVEL_GRID_2 = [
-    [ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-    [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [ 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-    [ 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1]
-]
-
-
+import maps
 
 class Level:
     def __init__(self, grid):
+        self.CANVAS_WIDTH = 720
+        self.CANVAS_HEIGHT = 720
+        self.WALL = 1
         self.grid = grid
         self.grid_width = len(grid[0])
         self.grid_height = len(grid)
-        self.cell_width = WIDTH // self.grid_width
-        self.cell_height = HEIGHT // self.grid_height
+        self.cell_width = self.CANVAS_WIDTH // self.grid_width
+        self.cell_height = self.CANVAS_HEIGHT // self.grid_height
+
+
 
     def draw(self, canvas):
         for y in range(self.grid_height):
@@ -85,7 +40,8 @@ class Level:
             return False
         if y >= self.grid_height:
             return False
-        return self.grid[y][x] == WALL
+        return self.grid[y][x] == self.WALL
+
 
 class Interaction:
     def __init__(self, level):
@@ -93,12 +49,12 @@ class Interaction:
     def draw(self, canvas):
         self.level.draw(canvas)
 
+if __name__ == "__main__":
+    level_start = Level(maps.LEVEL_GRID_CENTRE)
+    level_1 = Level(maps.LEVEL_GRID_1)
+    level_2 = Level(maps.LEVEL_GRID_2)
+    interaction = Interaction(level_start)
 
-level_start = Level(LEVEL_GRID_CENTRE)
-level_1 = Level(LEVEL_GRID_1)
-level_2 = Level(LEVEL_GRID_2)
-interaction = Interaction(level_1)
-
-frame = simplegui.create_frame("My Level", WIDTH, HEIGHT)
-frame.set_draw_handler(interaction.draw)
-frame.start()
+    frame = simplegui.create_frame("My Level", 720, 720)
+    frame.set_draw_handler(interaction.draw)
+    frame.start()
