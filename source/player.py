@@ -6,11 +6,13 @@ except ImportError :
 from vector import Vector
 from movement import Movement
 from projectile import Projectile
+from collider import Collider
 import os, math
 
 
-class Player:
+class Player(Collider):
     def __init__(self, init_pos):
+        super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         self.image = simplegui._load_local_image("images/player.png")
         self.pos = Vector(init_pos[0],init_pos[1])
         self.in_collision = False

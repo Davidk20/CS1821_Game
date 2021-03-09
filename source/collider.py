@@ -1,4 +1,4 @@
-from vector.py import Vector
+from vector import Vector
 
 
 class ColliderDimensionError(Exception):
@@ -10,25 +10,25 @@ class Collider:
         self.shape = shape
         self.pos = pos
         # initialize circle collider
-        if self.shape == circ:
+        if self.shape == "circ":
             if a == None:
                 # if a circle collider is created without radius it will cause errors later
                 # so best to throw error here to show cause of the problem
                 raise ColliderDimensionError("A circle collider requires a radius parameter")
             self.radius = a
-            if b != None:
+            if bool(b):
                 self.vel = b
             else:
                 self.vel = Vector(0, 0)
         # initialize rectangle collider
-        if self.shape == rect:
+        if self.shape == "rect":
             if a == None or b == None:
                 # if a rectangle collider is created without height and width it will cause errors later
                 # so best to throw error here to show cause of the problem
                 raise ColliderDimensionError("A rectangle collider requires height and width parameters")
             self.height = a
             self.width = b
-            if c != None:
+            if bool(c):
                 self.vel = c
             else:
                 self.vel = Vector(0, 0)
@@ -38,13 +38,13 @@ class Collider:
         # collisions with walls are handled by the wall, this allows .hit() to be called on colliders with wall colliders without writing the wall collision code in the regular collider as well
         if collider.shape == "wall":
             return collider.hit(self)
-        if self.shape == circ:
-            if collider.shape == rect:
+        if self.shape == "circ":
+            if collider.shape == "rect":
                 return collider.hit(self)
             # collision between two circles
             return collider.pos.copy().subtract(self.pos).length() <= collider.radius + self.radius
-        if self.shape == rect:
-            if collider.shape == circ:
+        if self.shape == "rect":
+            if collider.shape == "circ":
                 # collision between circle and rectangle, this works like collisions between two rectangles, so might need to be improved
                 return (collider.pos.x - self.pos.x <= collider.radius + self.width / 2) and (
                 collider.pos.y - self.pos.y <= collider.radius + self.height / 2)
