@@ -20,7 +20,7 @@ class Game:
         self.current_level = Level(self.level_order[0])
         self.kbd = Keyboard()
 		#this list currently stores any colliders in the game that the player will collide with
-        self.colliders = []
+        self.colliders = self.current_level.listWalls()
         #self.interaction = Interaction(self.player, self.kbd, [WallCollider(Vector(0,0), "v")])
         self.game_window_setup()
 
@@ -36,12 +36,12 @@ class Game:
 
     #Function handling drawing of all shapes on screen
     def draw(self, canvas):
+        self.current_level.draw(canvas)
         for i in self.colliders:
             if self.player.hit(i):
                 self.player.bounceZeroMass(i)
         self.player.draw(canvas)
         self.enemy.draw(canvas)
-        self.current_level.draw(canvas)
         #self.interaction.update() #this is not necessary, just use lines below instead
         self.player.check_input(self.kbd)
         self.player.rotate()

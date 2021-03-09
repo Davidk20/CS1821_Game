@@ -46,11 +46,11 @@ class Collider:
         if self.shape == "rect":
             if collider.shape == "circ":
                 # collision between circle and rectangle, this works like collisions between two rectangles, so might need to be improved
-                return (collider.pos.x - self.pos.x <= collider.radius + self.width / 2) and (
-                collider.pos.y - self.pos.y <= collider.radius + self.height / 2)
+                return (abs(collider.pos.x - self.pos.x) <= collider.radius + self.width / 2) and (
+                abs(collider.pos.y - self.pos.y) <= collider.radius + self.height / 2)
             # collision between two rectangles
-            return (collider.pos.x - self.pos.x <= collider.width / 2 + self.width / 2) and (
-            collider.pos.y - self.pos.y <= collider.height / 2 + self.height / 2)
+            return (abs(collider.pos.x - self.pos.x) <= collider.width / 2 + self.width / 2) and (
+            abs(collider.pos.y - self.pos.y) <= collider.height / 2 + self.height / 2)
 
     # collision tracking, should help with sticky problem, but must still be partially handled outside collider class
     def add_collision(self, collider):

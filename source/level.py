@@ -4,6 +4,8 @@ except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 import maps
+from collider import Collider
+from vector import Vector
 
 class Level:
     def __init__(self, grid):
@@ -15,6 +17,11 @@ class Level:
         self.grid_height = len(grid)
         self.cell_width = self.CANVAS_WIDTH // self.grid_width
         self.cell_height = self.CANVAS_HEIGHT // self.grid_height
+        self.colliders = []
+        for y in range(self.grid_height):
+            for x in range (self.grid_width):
+                if self.is_wall(x, y):
+                    self.colliders.append(Collider("rect", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
 
 
 
@@ -41,6 +48,9 @@ class Level:
         if y >= self.grid_height:
             return False
         return self.grid[y][x] == self.WALL
+    
+    def listWalls(self):
+        return self.colliders
 
 
 class Interaction:
