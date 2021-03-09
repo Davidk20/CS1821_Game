@@ -15,7 +15,6 @@ class Player(Collider):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         self.image = simplegui._load_local_image("images/player.png")
         self.pos = Vector(init_pos[0],init_pos[1])
-        self.in_collision = False
         self.rotation = 0
         self.time = 0
         
@@ -103,7 +102,12 @@ class Player(Collider):
              (32,32),
              self.rotation
         )
-
+	
+    def bounceZeroMass(self, collider):
+        if collider.shape == "wall":
+            self.movement.vel_vector.add(collider.normal.copy().multiply(self.speed))
+        else:
+            self.movement.vel_vector.add(self.pos.copy().subtract(collider.pos).normalize().multiply(self.speed))
 
     #add/remove functions for all values
     def remove_life(self,value):

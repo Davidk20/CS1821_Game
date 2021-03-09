@@ -63,8 +63,11 @@ class Collider:
         self.collisionList.remove(collider)
 
     # two types of bounce for use with physics moving objects
-    def bounceZeroMass(self, normal):
-        self.vel.reflect(normal)
+    def bounceZeroMass(self, collider):
+        if collider.shape == "wall":
+            self.vel.reflect(collider.normal)
+        else:
+            self.vel.reflect(self.pos.copy().subtract(collider.pos).normalize())
 
     def bounceMomentum(self, collider):
         connect = self.pos.copy().subtract(collider.pos)

@@ -7,6 +7,9 @@ from player import Player
 from keyboard import Keyboard
 from enemy import Enemy
 from level import Level
+from wallcollider import WallCollider
+from collider import Collider
+from vector import Vector
 import maps
 
 class Game:
@@ -16,7 +19,9 @@ class Game:
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
         self.kbd = Keyboard()
-        self.interaction = Interaction(self.player, self.kbd)
+		#this list currently stores any colliders in the game that the player will collide with
+        self.colliders = []
+        #self.interaction = Interaction(self.player, self.kbd, [WallCollider(Vector(0,0), "v")])
         self.game_window_setup()
 
 
@@ -31,21 +36,27 @@ class Game:
 
     #Function handling drawing of all shapes on screen
     def draw(self, canvas):
+        for i in self.colliders:
+            if self.player.hit(i):
+                self.player.bounceZeroMass(i)
         self.player.draw(canvas)
         self.enemy.draw(canvas)
         self.current_level.draw(canvas)
-        self.interaction.update()
+        #self.interaction.update() #this is not necessary, just use lines below instead
+        self.player.check_input(self.kbd)
+        self.player.rotate()
 
 
-# Class to link player to keyboard for interactions with other shapes
-class Interaction:
-    def __init__(self, player, keyboard):
-        self.player = player
-        self.keyboard = keyboard
+# Class to link player to keyboard for interactions with other shapes (removed because it was not needed)
+# class Interaction:
+    # def __init__(self, player, keyboard, colliders):
+        # self.player = player
+        # self.keyboard = keyboard
+        # self.colliders = colliders
     
-    def update(self):
-        self.player.check_input(self.keyboard)
-        self.player.rotate() # Rotates the player every frame.
+    # def update(self):
+        # self.player.check_input(self.keyboard)
+        # self.player.rotate() # Rotates the player every frame.
 
 if __name__ == "__main__":
     Game()
