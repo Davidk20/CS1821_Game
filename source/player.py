@@ -9,7 +9,6 @@ from projectile import Projectile
 from collider import Collider
 import os, math
 
-
 class Player(Collider):
     def __init__(self, init_pos):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
@@ -103,6 +102,7 @@ class Player(Collider):
              self.rotation
         )
 	
+    # Overrides the function from the Collider class.
     def bounceZeroMass(self, collider):
         if collider.shape == "wall":
             self.movement.vel_vector.add(collider.normal.copy().multiply(self.speed))

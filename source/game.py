@@ -17,7 +17,7 @@ class Game:
     def __init__(self):
         self.player = Player([350,350])
         self.hud = Hud(self.player)
-        self.enemy = Enemy(30, 1, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])
+        self.enemies = [Enemy(30, 1, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])]
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
         self.kbd = Keyboard()
@@ -44,7 +44,14 @@ class Game:
             if self.player.hit(i):
                 self.player.bounceZeroMass(i)
         self.player.draw(canvas)
-        self.enemy.draw(canvas)
+
+        for enemy in self.enemies:
+            if self.player.hit(enemy):
+                self.player.bounceZeroMass(i)
+                self.player.remove_life(1)
+
+            enemy.draw(canvas)
+            
         #self.interaction.update() #this is not necessary, just use lines below instead
         self.player.check_input(self.kbd)
         self.player.rotate()
