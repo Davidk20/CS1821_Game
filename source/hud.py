@@ -37,5 +37,6 @@ class Hud:
 
     #updates the image corresponding to health
     def hit(self):
-        self.hearts_img_width = self.hearts_img_width - 45
-        self.hearts_centre = [self.hearts_img_width/2, self.hearts_img_height/2]
+        if self.hearts_img_width >= 45:
+            self.hearts_img_width = self.hearts_img_width - 45
+            self.hearts_centre = [self.hearts_img_width/2, self.hearts_img_height/2]
