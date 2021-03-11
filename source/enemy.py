@@ -18,6 +18,7 @@ class Enemy:
 
         self.health = 100
         self.damage = 20
+        self.score = 5
 
      #updates values regarding enemy position
     def update(self):
@@ -38,5 +39,9 @@ class Enemy:
 
     def remove_health(self, amount):
         self.health -= amount
+        if self.health <= 0:
+            self.die()
 
+    def die(self):
+        return self.score
     
