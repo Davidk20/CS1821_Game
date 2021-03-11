@@ -134,15 +134,3 @@ class Player(Collider):
     
     def add_score(self, value):
         self.score += value
-
-    def remove_coins(self, value):
-        self.coins -= value
-
-    def add_coins(self, value):
-        self.coins += value
-
-    def remove_inventory(self, value):
-        self.inventory.remove(value)
-
-    def add_inventory(self, value):
-        self.inventory.append(value)
