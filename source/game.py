@@ -7,6 +7,7 @@ from player import Player
 from keyboard import Keyboard
 from enemy import Enemy
 from level import Level
+from hud import Hud
 from wallcollider import WallCollider
 from collider import Collider
 from vector import Vector
@@ -15,6 +16,7 @@ import maps
 class Game:
     def __init__(self):
         self.player = Player([350,350])
+        self.hud = Hud(self.player)
         self.enemy = Enemy(30, 1, [210, 210])
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
@@ -23,6 +25,7 @@ class Game:
         self.colliders = self.current_level.listWalls()
         #self.interaction = Interaction(self.player, self.kbd, [WallCollider(Vector(0,0), "v")])
         self.game_window_setup()
+        
 
 
     #Setup of SimpleGUI window
@@ -45,6 +48,7 @@ class Game:
         #self.interaction.update() #this is not necessary, just use lines below instead
         self.player.check_input(self.kbd)
         self.player.rotate()
+        self.hud.draw(canvas)
 
 
 # Class to link player to keyboard for interactions with other shapes (removed because it was not needed)
