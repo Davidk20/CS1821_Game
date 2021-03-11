@@ -15,9 +15,12 @@ class Player(Collider):
         self.image = simplegui._load_local_image("images/player.png")
         self.pos = Vector(init_pos[0],init_pos[1])
         self.rotation = 0
+
         self.time = 0
-        
-        self.shoot = True
+
+        self.can_shoot = True
+        self.can_remove_life = True
+
         self.speed = 2
         self.lives = 3
         self.score = 0
@@ -39,7 +42,7 @@ class Player(Collider):
             self.movement.move_vertical(-1) #move down
         if keyboard.space == True and self.shoot:
             self.last_shot_time = self.time
-            self.shoot = False
+            self.can_shoot = False
             fire = Projectile(
                 self.pos.get_p(),
                 self.rotation,
@@ -77,9 +80,14 @@ class Player(Collider):
     def update(self):
         self.movement.update()
         self.pos = self.movement.pos_vector
+
         self.time += 1
-        if self.shoot == False and self.time - self.last_shot_time >= 20:
-            self.shoot = True
+
+        if self.can_shoot == False and self.time - self.last_shot_time >= 20:
+            self.can_shoot = True
+
+        if self.can_remove_life == False and self.time - self.last_time_remove_life >= 40: # Time between player being able to lose life.
+            self.can_remove_life = True
 
     #function to draw the player
     def draw(self, canvas):
@@ -118,7 +126,10 @@ class Player(Collider):
 
     #add/remove functions for all values
     def remove_life(self,value):
-        self.lives -= value
+        if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
+            self.last_time_remove_life = self.time
+            self.can_remove_life = False
+            self.lives -= value
 
     def add_life(self, value):
         self.lives += value
