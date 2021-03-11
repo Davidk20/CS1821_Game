@@ -38,7 +38,6 @@ class EnemyMovement (Movement):
 
             # Checks if the current enemy position matches their current patrol position.
             if round(self.pos_vector.x) == self.patrol_points[self.current_point].x and round(self.pos_vector.y) == self.patrol_points[self.current_point].y:
-                print("Reached a patrol point!")
                 self.current_point += 1
 
     def set_target(self):
