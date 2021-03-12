@@ -1,6 +1,6 @@
 from vector import Vector
 
-
+#TODO refactor into collider class
 class WallCollider:
     def __init__(self, pos, ori):
         self.pos = pos

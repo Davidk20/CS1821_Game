@@ -9,23 +9,28 @@ from projectile import Projectile
 from collider import Collider
 import os, math
 
-
 class Player(Collider):
     def __init__(self, init_pos):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         self.image = simplegui._load_local_image("images/player.png")
         self.pos = Vector(init_pos[0],init_pos[1])
         self.rotation = 0
+
+        #TODO move to interaction class handling time between actions
         self.time = 0
-        
-        self.shoot = True
+        self.can_shoot = True
+        self.can_remove_life = True
+
+
         self.speed = 2
         self.lives = 3
         self.score = 0
         self.bullets = []
 
+        #TODO move into instance of interaction
         self.movement = Movement(self.speed, self.pos)
 
+    #TODO move to interaction
     #function to check and control player movement
     def check_input(self, keyboard):
         if keyboard.left == True:
@@ -36,9 +41,9 @@ class Player(Collider):
             self.movement.move_vertical(1) #move up
         if keyboard.down == True:
             self.movement.move_vertical(-1) #move down
-        if keyboard.space == True and self.shoot:
+        if keyboard.space == True and self.can_shoot:
             self.last_shot_time = self.time
-            self.shoot = False
+            self.can_shoot = False
             fire = Projectile(
                 self.pos.get_p(),
                 self.rotation,
@@ -47,6 +52,7 @@ class Player(Collider):
                 )
             self.bullets.append(fire)
 
+    #TODO move into movement class
     def rotate(self):
         """
         Rotates the player based off their velocity vector.
@@ -72,14 +78,21 @@ class Player(Collider):
         elif vel_vector.y < -0.1: # Moving up
             self.rotation = 0
 
+    #TODO move to interaction class
     #updates values regarding player position
     def update(self):
         self.movement.update()
         self.pos = self.movement.pos_vector
-        self.time += 1
-        if self.shoot == False and self.time - self.last_shot_time >= 20:
-            self.shoot = True
 
+        self.time += 1
+
+        if self.can_shoot == False and self.time - self.last_shot_time >= 20:
+            self.can_shoot = True
+
+        if self.can_remove_life == False and self.time - self.last_time_remove_life >= 40: # Time between player being able to lose life.
+            self.can_remove_life = True
+
+    #TODO simplify and move to interaction class
     #function to draw the player
     def draw(self, canvas):
         self.update()
@@ -101,6 +114,8 @@ class Player(Collider):
              self.rotation
         )
 	
+    #TODO move into collider, or create PlayerCollider
+    # Overrides the function from the Collider class.
     def bounceZeroMass(self, collider):
         if collider.shape == "wall":
             self.movement.vel_vector.add(collider.normal.copy().multiply(self.speed))
@@ -114,9 +129,14 @@ class Player(Collider):
                 normal = Vector(0, normal.y).normalize()
             self.movement.vel_vector.add(normal.multiply(self.speed))
 
+
+    #TODO turn these into getters and setters
     #add/remove functions for all values
     def remove_life(self,value):
-        self.lives -= value
+        if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
+            self.last_time_remove_life = self.time
+            self.can_remove_life = False
+            self.lives -= value
 
     def add_life(self, value):
         self.lives += value
@@ -132,3 +152,6 @@ class Player(Collider):
     
     def add_score(self, value):
         self.score += value
+
+    def return_bullets(self):
+        return self.bullets

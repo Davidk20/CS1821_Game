@@ -7,6 +7,7 @@ import maps
 from collider import Collider
 from vector import Vector
 
+#TODO find way of obtaining current level globally
 class Level:
     def __init__(self, grid):
         self.CANVAS_WIDTH = 720
@@ -52,19 +53,9 @@ class Level:
     def listWalls(self):
         return self.colliders
 
-
+#TODO move into overall interaction class
 class Interaction:
     def __init__(self, level):
         self.level = level
     def draw(self, canvas):
         self.level.draw(canvas)
-
-if __name__ == "__main__":
-    level_start = Level(maps.LEVEL_GRID_CENTRE)
-    level_1 = Level(maps.LEVEL_GRID_1)
-    level_2 = Level(maps.LEVEL_GRID_2)
-    interaction = Interaction(level_start)
-
-    frame = simplegui.create_frame("My Level", 720, 720)
-    frame.set_draw_handler(interaction.draw)
-    frame.start()

@@ -5,6 +5,7 @@ except ImportError :
 
 from player import Player
 
+#TODO move globally
 WIDTH = 720
 HEIGHT = 720
 
@@ -19,6 +20,7 @@ class Hud:
         self.hearts_x = WIDTH/8
         self.hearts_y = HEIGHT/14
 
+        #TODO use getters from player.py
         self.lives = 3
         
         self.score_x = WIDTH - 200
@@ -37,5 +39,6 @@ class Hud:
 
     #updates the image corresponding to health
     def hit(self):
-        self.hearts_img_width = self.hearts_img_width - 45
-        self.hearts_centre = [self.hearts_img_width/2, self.hearts_img_height/2]
+        if self.hearts_img_width >= 45:
+            self.hearts_img_width = self.hearts_img_width - 45
+            self.hearts_centre = [self.hearts_img_width/2, self.hearts_img_height/2]
