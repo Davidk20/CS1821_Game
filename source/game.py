@@ -52,6 +52,14 @@ class Game:
 
             enemy.draw(canvas)
             
+        for i in self.player.return_bullets():
+            for enemy in self.enemies:
+                if i.hit(enemy):
+                    enemy.remove_health(i.get_damage())
+            for wall in self.colliders:
+                if i.hit(wall):
+                    print("hit")
+
         #self.interaction.update() #this is not necessary, just use lines below instead
         self.player.check_input(self.kbd)
         self.player.rotate()

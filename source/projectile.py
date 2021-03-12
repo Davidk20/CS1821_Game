@@ -4,10 +4,12 @@ except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from vector import Vector
+from collider import Collider
 import math
 
-class Projectile:
+class Projectile(Collider):
     def __init__(self, init_pos, player_direction, radius, color):
+        super().__init__("circ", Vector(init_pos[0],init_pos[1]), radius)
         self.vectors = {
             0.0:Vector(0,-1),
             45.0:Vector(1,-1),
@@ -26,6 +28,8 @@ class Projectile:
         #Projectile radius - Type = Int
         self.color = color
         #Projectile color - Type = string
+        self.damage = 50
+
 
     def out_of_bounds(self):
         current_pos = self.pos.get_p()
@@ -38,6 +42,8 @@ class Projectile:
         new_vector = self.vectors[math.degrees(direction)]
         return new_vector.multiply(10)
 
+    def get_damage(self):
+        return self.damage
 
     def draw(self, canvas):
         if self.out_of_bounds():

@@ -40,7 +40,7 @@ class Player(Collider):
             self.movement.move_vertical(1) #move up
         if keyboard.down == True:
             self.movement.move_vertical(-1) #move down
-        if keyboard.space == True and self.shoot:
+        if keyboard.space == True and self.can_shoot:
             self.last_shot_time = self.time
             self.can_shoot = False
             fire = Projectile(
@@ -145,3 +145,6 @@ class Player(Collider):
     
     def add_score(self, value):
         self.score += value
+
+    def return_bullets(self):
+        return self.bullets
