@@ -13,21 +13,22 @@ from collider import Collider
 from vector import Vector
 import maps
 
+#TODO create interaction function to handle/create all interactions
+#TODO organise variables such as canvas size globally across files
 class Game:
     def __init__(self):
         self.player = Player([350,350])
         self.hud = Hud(self.player)
+        #enemies to be removed once level format restructured
         self.enemies = [Enemy(30, 1, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])]
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
+        #kbd moved to interaction class
         self.kbd = Keyboard()
 		#this list currently stores any colliders in the game that the player will collide with
         self.colliders = self.current_level.listWalls()
-        #self.interaction = Interaction(self.player, self.kbd, [WallCollider(Vector(0,0), "v")])
         self.game_window_setup()
         
-
-
     #Setup of SimpleGUI window
     def game_window_setup(self):
         frame = simplegui.create_frame("Game", 720 , 720, 0)
@@ -38,6 +39,7 @@ class Game:
         frame.start()
 
     #Function handling drawing of all shapes on screen
+    #Needs to be moved into interaction
     def draw(self, canvas):
         self.current_level.draw(canvas)
         for i in self.colliders:

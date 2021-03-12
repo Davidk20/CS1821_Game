@@ -16,10 +16,11 @@ class Player(Collider):
         self.pos = Vector(init_pos[0],init_pos[1])
         self.rotation = 0
 
+        #TODO move to interaction class handling time between actions
         self.time = 0
-
         self.can_shoot = True
         self.can_remove_life = True
+
 
         self.speed = 2
         self.lives = 3
@@ -28,8 +29,10 @@ class Player(Collider):
         self.inventory = []
         self.bullets = []
 
+        #TODO move into instance of interaction
         self.movement = Movement(self.speed, self.pos)
 
+    #TODO move to interaction
     #function to check and control player movement
     def check_input(self, keyboard):
         if keyboard.left == True:
@@ -51,6 +54,7 @@ class Player(Collider):
                 )
             self.bullets.append(fire)
 
+    #TODO move into movement class
     def rotate(self):
         """
         Rotates the player based off their velocity vector.
@@ -76,6 +80,7 @@ class Player(Collider):
         elif vel_vector.y < -0.1: # Moving up
             self.rotation = 0
 
+    #TODO move to interaction class
     #updates values regarding player position
     def update(self):
         self.movement.update()
@@ -89,6 +94,7 @@ class Player(Collider):
         if self.can_remove_life == False and self.time - self.last_time_remove_life >= 40: # Time between player being able to lose life.
             self.can_remove_life = True
 
+    #TODO simplify and move to interaction class
     #function to draw the player
     def draw(self, canvas):
         self.update()
@@ -110,6 +116,7 @@ class Player(Collider):
              self.rotation
         )
 	
+    #TODO move into collider, or create PlayerCollider
     # Overrides the function from the Collider class.
     def bounceZeroMass(self, collider):
         if collider.shape == "wall":
@@ -124,6 +131,8 @@ class Player(Collider):
                 normal = Vector(0, normal.y).normalize()
             self.movement.vel_vector.add(normal.multiply(self.speed))
 
+
+    #TODO turn these into getters and setters
     #add/remove functions for all values
     def remove_life(self,value):
         if self.can_remove_life: # only removes life if a sufficient amount of time has passed.

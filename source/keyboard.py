@@ -3,6 +3,8 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
+#TODO pass into interaction class to handle
+
 class Keyboard:
     def __init__(self):
         self.left = False

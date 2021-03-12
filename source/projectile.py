@@ -7,6 +7,8 @@ from vector import Vector
 from collider import Collider
 import math
 
+#TODO add getters and setters
+
 class Projectile(Collider):
     def __init__(self, init_pos, player_direction, radius, color):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), radius)

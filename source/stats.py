@@ -1,0 +1,1 @@
+#TODO Move all stats into this file so player, enemy and bullet can inherit

@@ -10,6 +10,8 @@ from collider import Collider
 
 import os
 
+
+#TODO clean initialiser
 class Enemy (Collider):
     def __init__(self, radius, speed, init_pos, target = None, patrol_points = None):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
@@ -43,6 +45,7 @@ class Enemy (Collider):
             (32,32)
         )
 
+    #TODO add getters / setters
     def remove_health(self, amount):
         self.health -= amount
         if self.health <= 0:

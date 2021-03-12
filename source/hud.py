@@ -5,6 +5,7 @@ except ImportError :
 
 from player import Player
 
+#TODO move globally
 WIDTH = 720
 HEIGHT = 720
 
@@ -19,6 +20,7 @@ class Hud:
         self.hearts_x = WIDTH/8
         self.hearts_y = HEIGHT/14
 
+        #TODO use getters from player.py
         self.lives = 3
         
         self.score_x = WIDTH - 200
