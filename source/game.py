@@ -66,16 +66,5 @@ class Game:
         self.hud.draw(canvas)
 
 
-# Class to link player to keyboard for interactions with other shapes (removed because it was not needed)
-# class Interaction:
-    # def __init__(self, player, keyboard, colliders):
-        # self.player = player
-        # self.keyboard = keyboard
-        # self.colliders = colliders
-    
-    # def update(self):
-        # self.player.check_input(self.keyboard)
-        # self.player.rotate() # Rotates the player every frame.
-
 if __name__ == "__main__":
     Game()
