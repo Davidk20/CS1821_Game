@@ -22,8 +22,6 @@ class Player(Collider):
         self.speed = 2
         self.lives = 3
         self.score = 0
-        self.coins = 0
-        self.inventory = []
         self.bullets = []
 
         self.movement = Movement(self.speed, self.pos)
