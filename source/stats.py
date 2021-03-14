@@ -1,5 +1,3 @@
-#TODO Move all stats into this file so player, enemy and bullet can inherit
-
 class Stats:
     def __init__(self):
         self.alive = True
