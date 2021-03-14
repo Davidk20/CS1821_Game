@@ -3,20 +3,24 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from player import Player
-from keyboard import Keyboard
-from enemy import Enemy
-from level import Level
-from hud import Hud
-from wallcollider import WallCollider
-from collider import Collider
-from vector import Vector
-import maps
+from menu import Menu
+from source.player import Player
+from source.keyboard import Keyboard
+from source.enemy import Enemy
+from source.level import Level
+from source.hud import Hud
+from source.wallcollider import WallCollider
+from source.collider import Collider
+from source.vector import Vector
+import source.maps as maps
 
 #TODO create interaction function to handle/create all interactions
 #TODO organise variables such as canvas size globally across files
+#TODO link death process to game over screen
+
 class Game:
-    def __init__(self):
+    def __init__(self, frame):
+        self.frame = frame
         self.player = Player([350,350])
         self.hud = Hud(self.player)
         #enemies to be removed once level format restructured
@@ -31,16 +35,19 @@ class Game:
         
     #Setup of SimpleGUI window
     def game_window_setup(self):
-        frame = simplegui.create_frame("Game", 720 , 720, 0)
-        frame.set_canvas_background("#534a32")
-        frame.set_keydown_handler(self.kbd.keyDown)
-        frame.set_keyup_handler(self.kbd.keyUp)
-        frame.set_draw_handler(self.draw)
-        frame.start()
+        self.frame.set_canvas_background("#534a32")
+        self.frame.set_keydown_handler(self.kbd.keyDown)
+        self.frame.set_keyup_handler(self.kbd.keyUp)
+        self.frame.set_draw_handler(self.draw)
+        self.frame.start()
 
     #Function handling drawing of all shapes on screen
     #Needs to be moved into interaction
     def draw(self, canvas):
+        if not self.player.alive == True:
+            Menu(self.frame, "died")
+            return
+
         self.current_level.draw(canvas)
         for i in self.colliders:
             if self.player.hit(i):

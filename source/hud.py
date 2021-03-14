@@ -3,7 +3,7 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from player import Player
+from source.player import Player
 
 #TODO move globally
 WIDTH = 720
@@ -13,7 +13,7 @@ class Hud:
     def __init__(self, player):
         self.player = player
 
-        self.hearts_img = simplegui._load_local_image("images/hearts.png")
+        self.hearts_img = simplegui._load_local_image("source/images/hearts.png")
         self.hearts_img_width = self.hearts_img.get_width()
         self.hearts_img_height = self.hearts_img.get_height()
         self.hearts_centre = [self.hearts_img_width/2, self.hearts_img_height/2]

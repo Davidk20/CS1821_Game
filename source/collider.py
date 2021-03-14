@@ -1,4 +1,4 @@
-from vector import Vector
+from source.vector import Vector
 
 
 class ColliderDimensionError(Exception):

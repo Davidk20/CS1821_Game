@@ -3,8 +3,8 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from movement import Movement
-from vector import Vector
+from source.movement import Movement
+from source.vector import Vector
 
 class EnemyMovement (Movement):
     def __init__(self, speed, pos_vector, patrol_points = None, target = None):

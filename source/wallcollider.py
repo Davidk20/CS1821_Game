@@ -1,4 +1,4 @@
-from vector import Vector
+from source.vector import Vector
 
 #TODO refactor into collider class
 class WallCollider:

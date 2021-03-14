@@ -3,7 +3,7 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from vector import Vector
+from source.vector import Vector
 
 class Movement:
     def __init__(self, speed, pos_vector):

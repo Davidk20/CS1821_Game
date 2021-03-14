@@ -3,10 +3,10 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from movement import Movement
-from vector import Vector
-from enemy_movement import EnemyMovement
-from collider import Collider
+from source.movement import Movement
+from source.vector import Vector
+from source.enemy_movement import EnemyMovement
+from source.collider import Collider
 
 import os
 
@@ -16,7 +16,7 @@ class Enemy (Collider):
     def __init__(self, radius, speed, init_pos, target = None, patrol_points = None):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
 
-        self.image = simplegui._load_local_image("images/basic_enemy.png")
+        self.image = simplegui._load_local_image("source/images/basic_enemy.png")
         self.speed = speed
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.target = target

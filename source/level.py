@@ -3,9 +3,9 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-import maps
-from collider import Collider
-from vector import Vector
+import source.maps
+from source.collider import Collider
+from source.vector import Vector
 
 #TODO find way of obtaining current level globally
 class Level:
