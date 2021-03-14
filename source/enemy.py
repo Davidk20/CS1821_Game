@@ -45,7 +45,7 @@ class Enemy (Collider):
             (32,32)
         )
 
-    #TODO add getters / setters
+
     def remove_health(self, amount):
         self.health -= amount
         if self.health <= 0:

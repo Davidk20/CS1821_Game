@@ -32,7 +32,7 @@ class Projectile(Collider):
         #Projectile color - Type = string
         self.damage = 50
 
-
+    #TODO link to movement class
     def out_of_bounds(self):
         current_pos = self.pos.get_p()
         if current_pos[0] > 700 or current_pos [0] < 0 or current_pos[1] > 700 or current_pos [1] < 0:
