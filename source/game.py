@@ -57,11 +57,11 @@ class Game:
         for enemy in self.enemies:
             if self.player.hit(enemy):
                 self.player.bounceZeroMass(i)
-                self.player.remove_life(1)
+                self.player.set_life(-1)
 
             enemy.draw(canvas)
             
-        for i in self.player.return_bullets():
+        for i in self.player.get_bullets():
             for enemy in self.enemies:
                 if i.hit(enemy):
                     enemy.remove_health(i.get_damage())

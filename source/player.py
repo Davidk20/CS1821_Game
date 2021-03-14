@@ -132,30 +132,29 @@ class Player(Collider):
     def die(self):
         self.alive = False
 
-    #TODO turn these into getters and setters
     #add/remove functions for all values
-    def remove_life(self,value):
-        if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
-            self.last_time_remove_life = self.time
-            self.can_remove_life = False
-            self.lives -= value
-        if self.lives <= 0:
-            self.die()
+    def set_life(self,value):
+        if value > 0:
+            self.lives += 0
+        else:
+            if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
+                self.last_time_remove_life = self.time
+                self.can_remove_life = False
+                self.lives -= value
+            if self.lives <= 0:
+                self.die()
 
-    def add_life(self, value):
-        self.lives += value
+    def get_lives(self):
+        return self.lives
 
-    def remove_speed(self, value):
-        self.speed -= value
-    
-    def add_speed(self, value):
+    def set_speed(self, value):
         self.speed += value
 
-    def remove_score(self, value):
-        self.score -= value
-    
-    def add_score(self, value):
+    def set_score(self, value):
         self.score += value
 
-    def return_bullets(self):
+    def get_score(self):
+        return self.score
+
+    def get_bullets(self):
         return self.bullets
