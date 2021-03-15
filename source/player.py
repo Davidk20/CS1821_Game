@@ -108,17 +108,6 @@ class Player(Collider, PlayerStats):
 
         if Clock.transition(1):
             self.sprite.next_frame()
-
-        '''
-        canvas.draw_image(
-            self.image,
-             (16, 16),
-             (32, 32),
-             self.pos.get_p(), 
-             (32,32),
-             self.rotation
-        )
-        '''
 	
     #TODO move into collider, or create PlayerCollider
     # Overrides the function from the Collider class.

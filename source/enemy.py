@@ -8,15 +8,17 @@ from source.vector import Vector
 from source.enemy_movement import EnemyMovement
 from source.collider import Collider
 from source.stats import EnemyStats
-
-
+from source.spritesheet import Spritesheet
+from source.clock import Clock
 
 #TODO clean initialiser
 class Enemy (Collider, EnemyStats):
     def __init__(self, radius, init_pos, target = None, patrol_points = None):
         Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         EnemyStats.__init__(self)
-        self.image = simplegui._load_local_image("source/images/basic_enemy.png")
+
+        self.sprite = Spritesheet("source/images/basic_enemy.png", 1, 1)
+
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.target = target
         self.patrol_points = patrol_points
@@ -32,14 +34,11 @@ class Enemy (Collider, EnemyStats):
     #function to draw the enemy
     def draw(self, canvas):
         self.update()
-        canvas.draw_image(
-            self.image,
-            (16,16),
-            (32,32),
-            self.pos.get_p(),
-            (32,32)
-        )
 
+        self.sprite.draw(canvas, self.pos)
+
+        if Clock.transition(1):
+            self.sprite.next_frame()
 
     def remove_health(self, amount):
         self.health -= amount
