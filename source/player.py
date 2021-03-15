@@ -104,10 +104,10 @@ class Player(Collider, PlayerStats):
             self.bullets.remove(i)
 
 
-        self.spritesheet.draw(canvas)
+        self.sprite.draw(canvas, self.pos)
 
         if Clock.transition(1):
-            sprite.next_frame()
+            self.sprite.next_frame()
 
         '''
         canvas.draw_image(
