@@ -16,7 +16,6 @@ import source.maps as maps
 
 #TODO create interaction function to handle/create all interactions
 #TODO organise variables such as canvas size globally across files
-#TODO link death process to game over screen
 
 class Game:
     def __init__(self, frame):
