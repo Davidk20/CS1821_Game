@@ -5,12 +5,14 @@ except ImportError :
 
 from source.vector import Vector
 from source.collider import Collider
+from source.stats import ProjectileStats
 import math
 
 
-class Projectile(Collider):
+class Projectile(Collider, ProjectileStats):
     def __init__(self, init_pos, player_direction, radius, color):
-        super().__init__("circ", Vector(init_pos[0],init_pos[1]), radius)
+        Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), radius)
+        ProjectileStats.__init__(self)
         self.vectors = {
             0.0:Vector(0,-1),
             45.0:Vector(1,-1),
@@ -48,7 +50,7 @@ class Projectile(Collider):
 
     def draw(self, canvas):
         if self.out_of_bounds():
-            return
+            self.die()
         else:
             self.update()
             canvas.draw_circle(

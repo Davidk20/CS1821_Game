@@ -39,9 +39,14 @@ class PlayerStats(Stats):
     def set_score(self, value):
         self.score += value
 
-
     def get_bullets(self):
         return self.bullets
+    
+    def add_bullets(self, bullet):
+        self.bullets.append(bullet)
+
+    def remove_bullets(self, bullet):
+        self.bullets.remove(bullet)
 
 
 class EnemyStats(Stats):
@@ -60,7 +65,7 @@ class EnemyStats(Stats):
         return self.health
 
 
-class Bullet(Stats):
+class ProjectileStats(Stats):
     def __init__(self, color = "red"):
         Stats.__init__(self)
         self.damage = 100
