@@ -12,6 +12,7 @@ from source.hud import Hud
 from source.wallcollider import WallCollider
 from source.collider import Collider
 from source.vector import Vector
+from source.clock import Clock
 import source.maps as maps
 
 #TODO create interaction function to handle/create all interactions
@@ -30,6 +31,7 @@ class Game:
         self.kbd = Keyboard()
 		#this list currently stores any colliders in the game that the player will collide with
         self.colliders = self.current_level.listWalls()
+        
         self.game_window_setup()
         
     #Setup of SimpleGUI window
@@ -68,10 +70,10 @@ class Game:
                 if i.hit(wall):
                     print("hit")
 
-        #self.interaction.update() #this is not necessary, just use lines below instead
         self.player.check_input(self.kbd)
         self.player.rotate()
         self.hud.draw(canvas)
+        Clock.tick()
 
 
 if __name__ == "__main__":

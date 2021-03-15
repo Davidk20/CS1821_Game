@@ -3,6 +3,7 @@ try:
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
+from source.clock import Clock
 from source.vector import Vector
 from source.movement import Movement
 from source.projectile import Projectile
@@ -19,9 +20,12 @@ class Player(Collider, PlayerStats):
         self.rotation = 0
 
         #TODO move to interaction class handling time between actions
-        self.time = 0
         self.can_shoot = True
         self.can_remove_life = True
+        self.time_between_shots = 10
+        self.time_between_life_loss = 50
+
+        self.clock = Clock() # used for time intervals
 
 
         #TODO move into instance of interaction
@@ -39,7 +43,6 @@ class Player(Collider, PlayerStats):
         if keyboard.down == True:
             self.movement.move_vertical(-1) #move down
         if keyboard.space == True and self.can_shoot:
-            self.last_shot_time = self.time
             self.can_shoot = False
             fire = Projectile(
                 self.pos.get_p(),
@@ -81,12 +84,10 @@ class Player(Collider, PlayerStats):
         self.movement.update()
         self.pos = self.movement.pos_vector
 
-        self.time += 1
-
-        if self.can_shoot == False and self.time - self.last_shot_time >= 20:
+        if self.can_shoot == False and self.clock.transition(self.time_between_shots):
             self.can_shoot = True
 
-        if self.can_remove_life == False and self.time - self.last_time_remove_life >= 40: # Time between player being able to lose life.
+        if self.can_remove_life == False and self.clock.transition(self.time_between_life_loss): # Time between player being able to lose life.
             self.can_remove_life = True
 
     #TODO simplify and move to interaction class
@@ -135,7 +136,6 @@ class Player(Collider, PlayerStats):
             self.lives += 0
         else:
             if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
-                self.last_time_remove_life = self.time
                 self.can_remove_life = False
                 self.lives += value
             if self.lives <= 0:
