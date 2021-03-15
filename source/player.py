@@ -84,10 +84,10 @@ class Player(Collider, PlayerStats):
         self.movement.update()
         self.pos = self.movement.pos_vector
 
-        if self.can_shoot == False and self.clock.transition(self.time_between_shots):
+        if self.can_shoot == False and Clock.transition(self.time_between_shots):
             self.can_shoot = True
 
-        if self.can_remove_life == False and self.clock.transition(self.time_between_life_loss): # Time between player being able to lose life.
+        if self.can_remove_life == False and Clock.transition(self.time_between_life_loss): # Time between player being able to lose life.
             self.can_remove_life = True
 
     #TODO simplify and move to interaction class
