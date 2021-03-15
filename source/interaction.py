@@ -2,6 +2,7 @@ try:
     import simplegui
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+    
 from source.player import Player
 from source.keyboard import Keyboard
 from source.enemy import Enemy

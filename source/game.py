@@ -3,7 +3,7 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from menu import Menu
+from main import Menu
 from source.player import Player
 from source.keyboard import Keyboard
 from source.enemy import Enemy
