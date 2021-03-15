@@ -7,9 +7,10 @@ from source.vector import Vector
 from source.movement import Movement
 from source.projectile import Projectile
 from source.collider import Collider
+from source.stats import PlayerStats
 import os, math
 
-class Player(Collider):
+class Player(Collider, PlayerStats):
     def __init__(self, init_pos):
         super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         self.image = simplegui._load_local_image("source/images/player.png")
