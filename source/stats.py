@@ -15,8 +15,9 @@ class Stats:
 
 
 class PlayerStats(Stats):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, speedMul):
+        Stats.__init__(self)
+        self.speed = self.speed * speedMul
         self.lives = 3
         self.score = 0
         self.bullets = []
@@ -44,11 +45,11 @@ class PlayerStats(Stats):
 
 
 class EnemyStats(Stats):
-    def __init__(self):
-        super().__init__()
-        self.health = 100
-        self.score = 5
-        self.speed = 1
+    def __init__(self, healthMul = 1, speedMul = 1, scoreMul = 1):
+        Stats.__init__(self)
+        self.health = 100 * healthMul
+        self.speed = self.speed * speedMul
+        self.score = 5 * scoreMul
 
     def set_health(self, amount):
         self.health += amount
@@ -61,7 +62,7 @@ class EnemyStats(Stats):
 
 class Bullet(Stats):
     def __init__(self, color = "red"):
-        super().__init__()
+        Stats.__init__(self)
         self.damage = 100
         self.color = color
 

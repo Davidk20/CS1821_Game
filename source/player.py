@@ -1,6 +1,6 @@
 try:
     import simplegui
-except ImportError :
+except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from source.clock import Clock
@@ -12,8 +12,9 @@ from source.stats import PlayerStats
 import os, math
 
 class Player(Collider, PlayerStats):
-    def __init__(self, init_pos):
-        super().__init__("circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
+    def __init__(self, init_pos, speedMul = 2):
+        Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
+        PlayerStats.__init__(self, speedMul)
         self.image = simplegui._load_local_image("source/images/player.png")
         self.pos = Vector(init_pos[0],init_pos[1])
         self.rotation = 0
@@ -26,11 +27,6 @@ class Player(Collider, PlayerStats):
 
         self.clock = Clock() # used for time intervals
 
-        self.alive = True
-        self.speed = 2
-        self.lives = 3
-        self.score = 0
-        self.bullets = []
 
         #TODO move into instance of interaction
         self.movement = Movement(self.speed, self.pos)

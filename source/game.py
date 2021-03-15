@@ -25,7 +25,7 @@ class Game:
         self.player = Player([350,350])
         self.hud = Hud(self.player)
         #enemies to be removed once level format restructured
-        self.enemies = [Enemy(30, 1, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])]
+        self.enemies = [Enemy(30, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])]
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
         #kbd moved to interaction class
