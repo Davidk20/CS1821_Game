@@ -140,7 +140,7 @@ class Player(Collider):
             if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
                 self.last_time_remove_life = self.time
                 self.can_remove_life = False
-                self.lives -= value
+                self.lives += value
             if self.lives <= 0:
                 self.die()
 
