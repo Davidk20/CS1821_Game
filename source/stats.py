@@ -10,6 +10,8 @@ class Stats:
     def set_speed(self, value):
         self.speed += value
 
+    def get_score(self):
+        return self.score
 
 
 class PlayerStats(Stats):
@@ -36,8 +38,6 @@ class PlayerStats(Stats):
     def set_score(self, value):
         self.score += value
 
-    def get_score(self):
-        return self.score
 
     def get_bullets(self):
         return self.bullets
