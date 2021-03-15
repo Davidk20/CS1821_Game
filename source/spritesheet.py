@@ -17,7 +17,7 @@ class Spritesheet:
         self.current_frame = 1
         self.current_col = 1
 
-    def draw(self, canvas, frame_index = None):
+    def draw(self, canvas, pos_vector, frame_index = None):
         if frame_index != None:
             self.current_frame = frame_index
 
@@ -33,7 +33,7 @@ class Spritesheet:
         
         width_height_dest = (self.frame_width, self.frame_height) # setting destination of image
         
-        canvas.draw_image(self.spritesheet, center_source, width_height_source, (WIDTH / 2, HEIGHT / 2), width_height_dest)
+        canvas.draw_image(self.spritesheet, center_source, width_height_source, pos_vector, width_height_dest)
 
     def next_frame(self):
         if (self.current_frame * self.current_col) + 1 > self.num_rows * self.num_cols:

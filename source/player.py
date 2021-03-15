@@ -9,13 +9,16 @@ from source.movement import Movement
 from source.projectile import Projectile
 from source.collider import Collider
 from source.stats import PlayerStats
+from source.spritesheet import Spritesheet
 import os, math
 
 class Player(Collider, PlayerStats):
     def __init__(self, init_pos, speedMul = 2):
         Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         PlayerStats.__init__(self, speedMul)
-        self.image = simplegui._load_local_image("source/images/player.png")
+        
+        self.sprite = Spritesheet("source/images/player.png", 1, 1)
+
         self.pos = Vector(init_pos[0],init_pos[1])
         self.rotation = 0
 
@@ -24,9 +27,6 @@ class Player(Collider, PlayerStats):
         self.can_remove_life = True
         self.time_between_shots = 10
         self.time_between_life_loss = 50
-
-        self.clock = Clock() # used for time intervals
-
 
         #TODO move into instance of interaction
         self.movement = Movement(self.speed, self.pos)
@@ -103,6 +103,13 @@ class Player(Collider, PlayerStats):
         for i in destroy:
             self.bullets.remove(i)
 
+
+        self.spritesheet.draw(canvas)
+
+        if Clock.transition(1):
+            sprite.next_frame()
+
+        '''
         canvas.draw_image(
             self.image,
              (16, 16),
@@ -111,6 +118,7 @@ class Player(Collider, PlayerStats):
              (32,32),
              self.rotation
         )
+        '''
 	
     #TODO move into collider, or create PlayerCollider
     # Overrides the function from the Collider class.

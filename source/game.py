@@ -74,7 +74,7 @@ class Game:
         self.player.check_input(self.kbd)
         self.player.rotate()
         self.hud.draw(canvas)
-        Clock.tick()
+        Clock.tick() # increment time in static clock class
 
 
 if __name__ == "__main__":
