@@ -68,7 +68,7 @@ class Game:
                     enemy.remove_health(i.get_damage())
             for wall in self.colliders:
                 if i.hit(wall):
-                    print("hit")
+                    i.die()
 
         self.player.check_input(self.kbd)
         self.player.rotate()

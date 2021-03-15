@@ -96,7 +96,7 @@ class Player(Collider, PlayerStats):
         self.update()
         destroy = []
         for i in self.bullets:
-            if i.out_of_bounds():
+            if i.alive == False:
                 destroy.append(i)
             else:
                 i.draw(canvas)
