@@ -33,7 +33,7 @@ class Hud:
         canvas.draw_text('Score: ' + str(self.player.get_score()), (self.score_x, self.score_y), 28, 'White', 'sans-serif')
         
         #checks if health has depleted
-        if self.lives > self.player.getlives():
+        if self.lives > self.player.get_lives():
             Hud.hit(self)
             self.lives -= 1
 
