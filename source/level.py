@@ -24,7 +24,11 @@ class Level:
                 if self.is_wall(x, y):
                     self.colliders.append(Collider("rect", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
 
+    def get_level(self):
+        return self.grid
 
+    def set_level(self, grid):
+        self.grid = grid
 
     def draw(self, canvas):
         for y in range(self.grid_height):

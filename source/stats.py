@@ -7,6 +7,9 @@ class Stats:
         self.alive = False
         return self.score
 
+    def get_speed(self):
+        return self.speed
+
     def set_speed(self, value):
         self.speed += value
 

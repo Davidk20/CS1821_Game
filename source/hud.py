@@ -30,10 +30,10 @@ class Hud:
     def draw(self, canvas):
         
         canvas.draw_image(self.hearts_img, self.hearts_centre, (self.hearts_img_width, self.hearts_img_height), (self.hearts_x, self.hearts_y), (self.hearts_img_width, self.hearts_img_height))
-        canvas.draw_text('Score: ' + str(self.player.score), (self.score_x, self.score_y), 28, 'White', 'sans-serif')
+        canvas.draw_text('Score: ' + str(self.player.get_score()), (self.score_x, self.score_y), 28, 'White', 'sans-serif')
         
         #checks if health has depleted
-        if self.lives > self.player.lives:
+        if self.lives > self.player.getlives():
             Hud.hit(self)
             self.lives -= 1
 
