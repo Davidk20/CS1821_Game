@@ -52,12 +52,12 @@ class Game:
         self.current_level.draw(canvas)
         for i in self.colliders:
             if self.player.hit(i):
-                self.player.bounceZeroMass(i)
+                self.player.bouncePlayer(i)
         self.player.draw(canvas)
 
         for enemy in self.enemies:
             if self.player.hit(enemy):
-                self.player.bounceZeroMass(i)
+                self.player.bouncePlayer(enemy)
                 self.player.set_life(-1)
 
             enemy.draw(canvas)

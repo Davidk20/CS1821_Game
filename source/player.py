@@ -7,15 +7,18 @@ from source.clock import Clock
 from source.vector import Vector
 from source.movement import Movement
 from source.projectile import Projectile
-from source.collider import Collider
+from source.collider import PlayerCollider
 from source.stats import PlayerStats
 from source.spritesheet import Spritesheet
 import os, math
 
+<<<<<<< Updated upstream
 
 class Player(Collider, PlayerStats):
+=======
+class Player(PlayerCollider, PlayerStats):
+>>>>>>> Stashed changes
     def __init__(self, init_pos, speedMul = 2):
-        Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         PlayerStats.__init__(self, speedMul)
         
         self.sprite = Spritesheet("source/images/player.png", 1, 1)
@@ -31,6 +34,7 @@ class Player(Collider, PlayerStats):
 
         #TODO move into instance of interaction
         self.movement = Movement(self.speed, self.pos)
+        PlayerCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
 
     #TODO move to interaction
     #function to check and control player movement
@@ -109,21 +113,7 @@ class Player(Collider, PlayerStats):
 
         if Clock.transition(1):
             self.sprite.next_frame()
-	
-    #TODO move into collider, or create PlayerCollider
-    # Overrides the function from the Collider class.
-    def bounceZeroMass(self, collider):
-        if collider.shape == "wall":
-            self.movement.vel_vector.add(collider.normal.copy().multiply(self.speed))
-        elif collider.shape == "circ":
-            self.movement.vel_vector.add(self.pos.copy().subtract(collider.pos).normalize().multiply(self.speed))
-        elif collider.shape == "rect":
-            normal = self.pos.copy().subtract(collider.pos).normalize()
-            if abs(normal.x) > abs(normal.y):
-                normal = Vector(normal.x, 0).normalize()
-            else:
-                normal = Vector(0, normal.y).normalize()
-            self.movement.vel_vector.add(normal.multiply(self.speed))
+    
 
     def die(self):
         self.alive = False

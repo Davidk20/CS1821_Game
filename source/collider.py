@@ -86,3 +86,22 @@ class Collider:
 
     def setVel(self, vel):
         self.vel = vel
+
+class PlayerCollider(Collider):
+    
+    def __init__(self, pos, movement):
+        Collider.__init__(self, "circ", pos, 16, Vector(0, 0))
+        self.movement = movement
+    
+    def bouncePlayer(self, collider):
+        if collider.shape == "wall":
+            self.movement.vel_vector.add(collider.normal.copy().multiply(self.speed))
+        elif collider.shape == "circ":
+            self.movement.vel_vector.add(self.pos.copy().subtract(collider.pos).normalize().multiply(self.speed))
+        elif collider.shape == "rect":
+            normal = self.pos.copy().subtract(collider.pos).normalize()
+            if abs(normal.x) > abs(normal.y):
+                normal = Vector(normal.x, 0).normalize()
+            else:
+                normal = Vector(0, normal.y).normalize()
+            self.movement.vel_vector.add(normal.multiply(self.speed))
