@@ -12,6 +12,7 @@ from source.stats import PlayerStats
 from source.spritesheet import Spritesheet
 import os, math
 
+
 class Player(Collider, PlayerStats):
     def __init__(self, init_pos, speedMul = 2):
         Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
