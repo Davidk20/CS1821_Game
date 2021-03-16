@@ -12,12 +12,7 @@ from source.stats import PlayerStats
 from source.spritesheet import Spritesheet
 import os, math
 
-<<<<<<< Updated upstream
-
-class Player(Collider, PlayerStats):
-=======
 class Player(PlayerCollider, PlayerStats):
->>>>>>> Stashed changes
     def __init__(self, init_pos, speedMul = 2):
         PlayerStats.__init__(self, speedMul)
         
