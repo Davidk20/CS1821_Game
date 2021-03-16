@@ -16,3 +16,11 @@ import source.maps as maps
 class Interaction:
     def __init__(self):
         pass
+
+
+'''
+hud interaction
+player interaction
+keyboard interaction
+map interaction
+'''
