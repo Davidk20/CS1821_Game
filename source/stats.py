@@ -1,3 +1,6 @@
+from source.clock import Clock
+
+
 class Stats:
     def __init__(self):
         self.alive = True
@@ -22,17 +25,22 @@ class PlayerStats(Stats):
         Stats.__init__(self)
         self.speed = self.speed * speedMul
         self.lives = 3
+        self.can_remove_life = True
+        self.time_between_life_loss = 50
         self.score = 0
         self.bullets = []
+        self.can_shoot = True
+        self.time_between_shots = 10
 
     def set_life(self,value):
         if value > 0:
-            self.lives += 0
+            self.lives += value
         else:
+            print(self.lives)
             if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
-                self.last_time_remove_life = self.time
+                self.last_time_remove_life = Clock.time
                 self.can_remove_life = False
-                self.lives -= value
+                self.lives += value
             if self.lives <= 0:
                 self.die()
 

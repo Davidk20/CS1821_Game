@@ -97,6 +97,7 @@ class Menu:
         self.frame.set_draw_handler(self.draw)
         self.frame.set_mouseclick_handler(self.mouse.click_handler)
         self.frame.set_canvas_background("black")
+        #self.frame._display_fps_average = True
         self.frame.start()
 
 

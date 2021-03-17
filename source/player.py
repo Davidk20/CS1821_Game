@@ -15,42 +15,13 @@ import os, math
 class Player(PlayerCollider, PlayerStats):
     def __init__(self, init_pos, speedMul = 2):
         PlayerStats.__init__(self, speedMul)
-        
-        self.sprite = Spritesheet("source/images/player.png", 1, 1)
-
         self.pos = Vector(init_pos[0],init_pos[1])
-        self.rotation = 0
-
-        #TODO move to interaction class handling time between actions
-        self.can_shoot = True
-        self.can_remove_life = True
-        self.time_between_shots = 10
-        self.time_between_life_loss = 50
-
-        #TODO move into instance of interaction
         self.movement = Movement(self.speed, self.pos)
         PlayerCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
+        self.sprite = Spritesheet("source/images/player.png", 1, 1)
+        #TODO move to movement
+        self.rotation = 0
 
-    #TODO move to interaction
-    #function to check and control player movement
-    def check_input(self, keyboard):
-        if keyboard.left == True:
-            self.movement.move_horizontal(-1) #move left
-        if keyboard.right == True:
-            self.movement.move_horizontal(1) #move right
-        if keyboard.up == True:
-            self.movement.move_vertical(1) #move up
-        if keyboard.down == True:
-            self.movement.move_vertical(-1) #move down
-        if keyboard.space == True and self.can_shoot:
-            self.can_shoot = False
-            fire = Projectile(
-                self.pos.get_p(),
-                self.rotation,
-                4,
-                "blue"
-                )
-            self.bullets.append(fire)
 
     #TODO move into movement class
     def rotate(self):
@@ -105,36 +76,6 @@ class Player(PlayerCollider, PlayerStats):
 
 
         self.sprite.draw(canvas, self.pos, self.rotation)
-
         if Clock.transition(1):
             self.sprite.next_frame()
     
-
-    def die(self):
-        self.alive = False
-
-    #add/remove functions for all values
-    def set_life(self,value):
-        if value > 0:
-            self.lives += 0
-        else:
-            if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
-                self.can_remove_life = False
-                self.lives += value
-            if self.lives <= 0:
-                self.die()
-
-    def get_lives(self):
-        return self.lives
-
-    def set_speed(self, value):
-        self.speed += value
-
-    def set_score(self, value):
-        self.score += value
-
-    def get_score(self):
-        return self.score
-
-    def get_bullets(self):
-        return self.bullets
