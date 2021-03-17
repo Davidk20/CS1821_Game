@@ -25,14 +25,15 @@ class Game:
         self.player = Player([350,350])
         self.kbd = Keyboard()
         self.kbdInteraction = KeyboardInteraction(self.player, self.kbd)
-        
+        #TODO setup HUD interaction
         self.hud = Hud(self.player)
-        #enemies to be removed once level format restructured
+        #TODO enemies to be removed once level format restructured
         self.enemies = [Enemy(30, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])]
+        #TODO move to level class?
         self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
         self.current_level = Level(self.level_order[0])
-        #kbd moved to interaction class
-		#this list currently stores any colliders in the game that the player will collide with
+		#TODO move this into an interaction class
+        #this list currently stores any colliders in the game that the player will collide with
         self.colliders = self.current_level.listWalls()
         
         self.game_window_setup()
@@ -46,13 +47,13 @@ class Game:
         self.frame.start()
 
     def get_dimensions(self):
-        return self.CANVAS_DIMENSIONS
+        return [720,720]
 
-    #Function handling drawing of all shapes on screen
-    #Needs to be moved into interaction
-    def draw(self, canvas):
-        self.current_level.draw(canvas)
-
+    def update(self):
+        Clock.tick() # increment time in static clock class
+        self.kbdInteraction.check_input()
+        #TODO move to movement
+        self.player.rotate()
         if not self.player.alive == True:
             Menu(self.frame, "died")
             return
@@ -60,14 +61,11 @@ class Game:
         for i in self.colliders:
             if self.player.hit(i):
                 self.player.bouncePlayer(i)
-        self.player.draw(canvas)
 
         for enemy in self.enemies:
             if self.player.hit(enemy):
                 self.player.bouncePlayer(enemy)
                 self.player.set_life(-1)
-
-            enemy.draw(canvas)
             
         for i in self.player.get_bullets():
             for enemy in self.enemies:
@@ -77,11 +75,14 @@ class Game:
                 if i.hit(wall):
                     i.die()
 
-        self.kbdInteraction.check_input()
-        #self.player.check_input(self.kbd)
-        self.player.rotate()
+    #Function handling drawing of all shapes on screen
+    def draw(self, canvas):
+        self.update()
+        self.current_level.draw(canvas)
+        self.player.draw(canvas)
+        for enemy in self.enemies:
+            enemy.draw(canvas)
         self.hud.draw(canvas)
-        Clock.tick() # increment time in static clock class
 
 
 if __name__ == "__main__":

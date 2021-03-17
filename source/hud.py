@@ -12,6 +12,7 @@ HEIGHT = 720
 class Hud:
     def __init__(self, player):
         self.player = player
+        self.lives = 3
 
         self.hearts_img = simplegui._load_local_image("source/images/hearts.png")
         self.hearts_img_width = self.hearts_img.get_width()
@@ -20,18 +21,15 @@ class Hud:
         self.hearts_x = WIDTH/8
         self.hearts_y = HEIGHT/14
 
-        #TODO use getters from player.py
-        self.lives = 3
-        
         self.score_x = WIDTH - 200
         self.score_y = HEIGHT - 663
         
 
     def draw(self, canvas):
-        
         canvas.draw_image(self.hearts_img, self.hearts_centre, (self.hearts_img_width, self.hearts_img_height), (self.hearts_x, self.hearts_y), (self.hearts_img_width, self.hearts_img_height))
         canvas.draw_text('Score: ' + str(self.player.get_score()), (self.score_x, self.score_y), 28, 'White', 'sans-serif')
         
+        #TODO possibly rewrite so that you can just update based on player.get_lives() rather than doing another calculation so that the draw function only handles drawing
         #checks if health has depleted
         if self.lives > self.player.get_lives():
             Hud.hit(self)

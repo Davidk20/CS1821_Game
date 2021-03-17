@@ -19,7 +19,6 @@ class Mouse:
             if position[0] != None:
                 self.pos = position
 
-
 class Button:
     def __init__(self, text, size, pos, frame):
         self.frame = frame

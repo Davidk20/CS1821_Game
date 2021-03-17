@@ -36,7 +36,6 @@ class PlayerStats(Stats):
         if value > 0:
             self.lives += value
         else:
-            print(self.lives)
             if self.can_remove_life: # only removes life if a sufficient amount of time has passed.
                 self.last_time_remove_life = Clock.time
                 self.can_remove_life = False
