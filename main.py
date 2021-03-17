@@ -4,6 +4,7 @@ except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from source import game
+from leaderboard import Leaderboard
 
 class Mouse:
     def __init__(self):
@@ -65,10 +66,10 @@ class Button:
             return self.text
 
 class Menu:
-
     def __init__(self, frame, mode = "start", score = 0):
         self.frame = frame
         self.score = score
+        self.leaderboard = Leaderboard()
         self.mouse = Mouse()
         if mode == "start":
             self.draw_start()
