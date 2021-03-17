@@ -66,10 +66,9 @@ class Button:
 
 class Menu:
 
-    def __init__(self, frame, mode = "start"):
+    def __init__(self, frame, mode = "start", score = 0):
         self.frame = frame
-        self.central = self.frame.get_canvas_textwidth('Python Game', 64, "sans-serif")
-        self.central = (720 - self.central) / 2
+        self.score = score
         self.mouse = Mouse()
         if mode == "start":
             self.draw_start()
@@ -77,8 +76,13 @@ class Menu:
             self.draw_game_over()
         self.draw_window()
 
+    def get_central(self, text):
+        central = self.frame.get_canvas_textwidth(text, 64, "sans-serif")
+        return (720 - central) / 2
+
     def draw_start(self):
         self.mode_text = "Python Game"
+        self.score_text = " "
         self.startButton = Button("Start Game", "large", [150,200], self.frame)
         self.lbButton = Button("Leaderboard", "large", [150,400], self.frame)
         self.quitButton = Button("Quit", "large", [150, 600], self.frame)
@@ -86,9 +90,10 @@ class Menu:
 
     def draw_game_over(self):
         self.mode_text = "GAME OVER"
-        self.restartButton = Button("Restart", "large", [150,200], self.frame)
+        self.score_text = "You scored " + str(self.score) + " points!"
+        self.restartButton = Button("Restart", "large", [150,250], self.frame)
         self.lbButton = Button("Leaderboard", "large", [150,400], self.frame)
-        self.quitButton = Button("Quit", "large", [150, 600], self.frame)
+        self.quitButton = Button("Quit", "large", [150, 550], self.frame)
         self.buttons = [self.restartButton, self.lbButton, self.quitButton]
 
 
@@ -103,7 +108,12 @@ class Menu:
     def draw(self, canvas):
         self.update()
         canvas.draw_text(self.mode_text,
-                         (self.central, 150), 
+                         (self.get_central(self.mode_text), 150), 
+                        64, 
+                        'White', 
+                        "sans-serif")
+        canvas.draw_text(self.score_text,
+                         (self.get_central(self.score_text), 220), 
                         64, 
                         'White', 
                         "sans-serif")

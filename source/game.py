@@ -56,7 +56,7 @@ class Game:
         #TODO move to movement
         self.player.rotate()
         if not self.player.alive == True:
-            Menu(self.frame, "died")
+            Menu(self.frame, "died", self.player.get_score())
             return
 
         for i in self.colliders:

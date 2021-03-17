@@ -37,7 +37,3 @@ class Enemy (Collider, EnemyStats):
     def draw(self, canvas):
         self.update()
         self.sprite.draw(canvas, self.pos)
-
-
-
-    

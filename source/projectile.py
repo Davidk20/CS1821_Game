@@ -45,8 +45,6 @@ class Projectile(Collider, ProjectileStats):
         new_vector = self.vectors[math.degrees(direction)]
         return new_vector.multiply(10)
 
-    def get_damage(self):
-        return self.damage
 
     def draw(self, canvas):
         if self.out_of_bounds():
