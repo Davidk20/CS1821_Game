@@ -3,11 +3,13 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-import source.maps
+import random
+import source.maps as maps
 from source.collider import Collider
 from source.vector import Vector
 
-#TODO find way of obtaining current level globally
+LEVELS_ARRAY = [maps.LEVEL_GRID_1, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3, maps.LEVEL_GRID_4, maps.LEVEL_GRID_5, maps.LEVEL_GRID_6]
+
 class Level:
     def __init__(self, grid):
         self.CANVAS_WIDTH = 720
@@ -19,6 +21,7 @@ class Level:
         self.cell_width = self.CANVAS_WIDTH // self.grid_width
         self.cell_height = self.CANVAS_HEIGHT // self.grid_height
         self.colliders = []
+        self.memory = -1
         for y in range(self.grid_height):
             for x in range (self.grid_width):
                 if self.is_wall(x, y):
@@ -34,6 +37,15 @@ class Level:
         for y in range(self.grid_height):
             for x in range (self.grid_width):
                 self.draw_cell(x, y, canvas)
+
+    def switch_level(self):
+        i = random.rantint(0, len(LEVELS_ARRAY))
+        while self.memory == i:
+            i = random.rantint(0, len(LEVELS_ARRAY))
+        
+        self.memory = i
+        self.grid = LEVELS_ARRAY(i)
+    
 
     def draw_cell (self, x, y, canvas):
         if self.is_wall(x, y):
