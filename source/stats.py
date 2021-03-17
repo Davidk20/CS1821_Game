@@ -8,7 +8,6 @@ class Stats:
 
     def die(self):
         self.alive = False
-        return self.score
 
     def get_speed(self):
         return self.speed
@@ -78,7 +77,7 @@ class EnemyStats(Stats):
 class ProjectileStats(Stats):
     def __init__(self, color = "red"):
         Stats.__init__(self)
-        self.damage = 100
+        self.damage = 50
         self.color = color
 
     def die(self):

@@ -18,6 +18,7 @@ from source.interaction import KeyboardInteraction
 
 #TODO create interaction function to handle/create all interactions
 #TODO organise variables such as canvas size globally across files
+#TODO create a flush() method to clean dead sprites at the end
 
 class Game:
     def __init__(self, frame):
@@ -63,14 +64,20 @@ class Game:
                 self.player.bouncePlayer(i)
 
         for enemy in self.enemies:
+            discard = []
             if self.player.hit(enemy):
                 self.player.bouncePlayer(enemy)
                 self.player.set_life(-1)
+            if enemy.alive == False:
+                discard.append(enemy)
+                self.player.set_score(enemy.get_score())
+            for i in discard:
+                self.enemies.remove(i)
             
         for i in self.player.get_bullets():
             for enemy in self.enemies:
                 if i.hit(enemy):
-                    enemy.remove_health(i.get_damage())
+                    enemy.set_health(- i.get_damage())
             for wall in self.colliders:
                 if i.hit(wall):
                     i.die()
@@ -81,7 +88,8 @@ class Game:
         self.current_level.draw(canvas)
         self.player.draw(canvas)
         for enemy in self.enemies:
-            enemy.draw(canvas)
+            if enemy.alive == True:
+                enemy.draw(canvas)
         self.hud.draw(canvas)
 
 

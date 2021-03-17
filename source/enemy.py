@@ -25,8 +25,10 @@ class Enemy (Collider, EnemyStats):
         self.in_collision = False
         self.movement = EnemyMovement(self.speed, self.pos, target = self.target, patrol_points = self.patrol_points)
 
-     #updates values regarding enemy position
+    #updates values regarding enemy position
     def update(self):
+        if Clock.transition(1):
+            self.sprite.next_frame()
         self.movement.patrol() # patrols enemy between a set of points
         self.movement.update() # updates enemy position
         self.pos = self.movement.pos_vector
@@ -34,17 +36,8 @@ class Enemy (Collider, EnemyStats):
     #function to draw the enemy
     def draw(self, canvas):
         self.update()
-
         self.sprite.draw(canvas, self.pos)
 
-        if Clock.transition(1):
-            self.sprite.next_frame()
 
-    def remove_health(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.die()
 
-    def die(self):
-        return self.score
     
