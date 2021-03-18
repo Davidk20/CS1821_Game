@@ -15,6 +15,7 @@ class Level:
         self.CANVAS_WIDTH = 720
         self.CANVAS_HEIGHT = 720
         self.WALL = 1
+        self.ENEMY = 2
         self.grid = grid
         self.grid_width = len(grid[0])
         self.grid_height = len(grid)
@@ -55,6 +56,7 @@ class Level:
 
             canvas.draw_polygon([[start_x, start_y], [start_x + self.cell_width, start_y], [start_x + self.cell_width, start_y + self.cell_height], [start_x, start_y + self.cell_height]], 0, 'Yellow', 'Orange')
 
+
     def is_wall(self, x, y):
         if x < 0:
             return False
@@ -64,8 +66,21 @@ class Level:
             return False
         if y >= self.grid_height:
             return False
+
         return self.grid[y][x] == self.WALL
     
+    def is_enemy_spawn(self, x, y):
+        if x < 2:
+            return False
+        if x >= self.grid_width:
+            return False
+        if y < 2:
+            return False
+        if y >= self.grid_height:
+            return False
+        
+        return self.grid[y][x] == self.ENEMY
+
     def listWalls(self):
         return self.colliders
 
