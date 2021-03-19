@@ -93,7 +93,7 @@ class SpriteCollider(Collider):
         Collider.__init__(self, "circ", pos, 16, Vector(0, 0))
         self.movement = movement
     
-    def bouncePlayer(self, collider):
+    def bounceSprite(self, collider):
         if collider.shape == "wall":
             self.movement.vel_vector.add(collider.normal.copy().multiply(self.movement.speed))
         elif collider.shape == "circ":
