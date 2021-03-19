@@ -16,8 +16,7 @@ from source.clock import Clock
 import source.maps as maps
 from source.interaction import KeyboardInteraction, MapInteraction
 
-#TODO create interaction function to handle/create all interactions
-#TODO organise variables such as canvas size globally across files
+
 #TODO create a flush() method to clean dead sprites at the end
 
 class Game:
@@ -28,12 +27,9 @@ class Game:
         self.kbdInteraction = KeyboardInteraction(self.player, self.kbd)
         self.map = MapInteraction(self.frame, self.player)
         self.enemies = self.map.current_level.get_enemies()
-        #TODO setup HUD interaction
         self.hud = Hud(self.player)
-		#TODO move this into an interaction class
         #this list currently stores any colliders in the game that the player will collide with
         self.colliders = self.map.current_level.listWalls()
-        
         self.game_window_setup()
         
     #Setup of SimpleGUI window

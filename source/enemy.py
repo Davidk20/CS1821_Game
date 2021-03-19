@@ -11,7 +11,7 @@ from source.stats import EnemyStats
 from source.spritesheet import Spritesheet
 from source.clock import Clock
 
-#TODO clean initialiser
+
 class Enemy (Collider, EnemyStats):
     def __init__(self, init_pos, target = None, patrol_points = None):
         Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))

@@ -5,7 +5,6 @@ except ImportError :
 
 from source.player import Player
 
-#TODO move globally
 WIDTH = 720
 HEIGHT = 720
 

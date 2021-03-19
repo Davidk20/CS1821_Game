@@ -51,13 +51,14 @@ class KeyboardInteraction(Interaction):
             self.player.bullets.append(fire)
 
 class HudInteraction(Interaction):
+    #TODO setup HUD interaction
     def __init__(self, player, hud):
         Interaction.__init__(self, player)
         self.hud = hud
 
+
 class MapInteraction:
     def __init__(self, frame, player):
-        #TODO put level order/array in here
         self.frame = frame
         self.player = player
         self.level_array = [
