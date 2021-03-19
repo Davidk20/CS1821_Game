@@ -54,16 +54,22 @@ class Game:
 
         for i in self.colliders:
             if self.player.hit(i):
-                self.player.bouncePlayer(i)
+                self.player.bounceSprite(i)
 
         for enemy in self.enemies:
             discard = []
             if self.player.hit(enemy):
-                self.player.bouncePlayer(enemy)
+                self.player.bounceSprite(enemy)
                 self.player.set_life(-1)
             if enemy.alive == False:
                 discard.append(enemy)
                 self.player.set_score(enemy.get_score())
+
+            for colliding_enemy in self.enemies:
+                if (enemy != colliding_enemy):
+                    if (colliding_enemy.hit(enemy)):
+                        #TODO increase the bounce momentum upon collision?
+                        colliding_enemy.bounceSprite(enemy)
             for i in discard:
                 self.enemies.remove(i)
             

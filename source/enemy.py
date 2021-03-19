@@ -6,22 +6,22 @@ except ImportError :
 from source.movement import Movement
 from source.vector import Vector
 from source.enemy_movement import EnemyMovement
-from source.collider import Collider
+from source.collider import SpriteCollider
 from source.stats import EnemyStats
 from source.spritesheet import Spritesheet
 from source.clock import Clock
 
-
-class Enemy (Collider, EnemyStats):
+#TODO clean initialiser
+class Enemy (SpriteCollider, EnemyStats):
     def __init__(self, init_pos, target = None, patrol_points = None):
-        Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
-        EnemyStats.__init__(self)
         self.sprite = Spritesheet("source/images/basic_enemy.png", 1, 1)
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.target = target
         self.patrol_points = patrol_points
         self.in_collision = False
+        EnemyStats.__init__(self)
         self.movement = EnemyMovement(self.speed, self.pos, target = self.target, patrol_points = self.patrol_points)
+        SpriteCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
 
     #updates values regarding enemy position
     def update(self):
