@@ -49,3 +49,6 @@ class Movement:
 
         self.pos_vector.add(self.vel_vector)
         self.vel_vector.multiply(0.3) #Dampens movement when coming to stop
+
+    def get_pos(self):
+        return self.pos_vector

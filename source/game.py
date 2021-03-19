@@ -14,7 +14,7 @@ from source.collider import Collider
 from source.vector import Vector
 from source.clock import Clock
 import source.maps as maps
-from source.interaction import KeyboardInteraction
+from source.interaction import KeyboardInteraction, MapInteraction
 
 #TODO create interaction function to handle/create all interactions
 #TODO organise variables such as canvas size globally across files
@@ -26,16 +26,13 @@ class Game:
         self.player = Player([350,350])
         self.kbd = Keyboard()
         self.kbdInteraction = KeyboardInteraction(self.player, self.kbd)
+        self.map = MapInteraction(self.frame, self.player)
+        self.enemies = self.map.current_level.get_enemies()
         #TODO setup HUD interaction
         self.hud = Hud(self.player)
-        #TODO enemies to be removed once level format restructured
-        self.enemies = [Enemy(30, [210, 210], patrol_points=[Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)])]
-        #TODO move to level class?
-        self.level_order = [maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_1, maps.LEVEL_GRID_2]
-        self.current_level = Level(self.level_order[0])
 		#TODO move this into an interaction class
         #this list currently stores any colliders in the game that the player will collide with
-        self.colliders = self.current_level.listWalls()
+        self.colliders = self.map.current_level.listWalls()
         
         self.game_window_setup()
         
@@ -85,7 +82,7 @@ class Game:
     #Function handling drawing of all shapes on screen
     def draw(self, canvas):
         self.update()
-        self.current_level.draw(canvas)
+        self.map.draw(canvas)
         self.player.draw(canvas)
         for enemy in self.enemies:
             if enemy.alive == True:

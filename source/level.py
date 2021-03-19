@@ -7,7 +7,7 @@ import random
 import source.maps as maps
 from source.collider import Collider
 from source.vector import Vector
-
+from source.enemy import Enemy
 LEVELS_ARRAY = [maps.LEVEL_GRID_1, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3, maps.LEVEL_GRID_4, maps.LEVEL_GRID_5, maps.LEVEL_GRID_6]
 
 class Level:
@@ -23,10 +23,17 @@ class Level:
         self.cell_height = self.CANVAS_HEIGHT // self.grid_height
         self.colliders = []
         self.memory = -1
+        self.enemy_array = []
         for y in range(self.grid_height):
             for x in range (self.grid_width):
                 if self.is_wall(x, y):
                     self.colliders.append(Collider("rect", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
+                if self.is_enemy_spawn(x, y):
+                    self.enemy_array.append(Enemy([(x*self.cell_width)+(self.cell_width/2),(y*self.cell_height)+(self.cell_height/2)]))
+
+
+    def get_enemies(self):
+        return self.enemy_array
 
     def get_level(self):
         return self.grid

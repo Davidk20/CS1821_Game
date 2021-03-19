@@ -13,8 +13,8 @@ from source.spritesheet import Spritesheet
 import os, math
 
 class Player(PlayerCollider, PlayerStats):
-    def __init__(self, init_pos, speedMul = 2):
-        PlayerStats.__init__(self, speedMul)
+    def __init__(self, init_pos):
+        PlayerStats.__init__(self)
         self.pos = Vector(init_pos[0],init_pos[1])
         self.movement = Movement(self.speed, self.pos)
         PlayerCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)

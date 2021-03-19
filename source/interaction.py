@@ -13,6 +13,8 @@ from source.wallcollider import WallCollider
 from source.collider import Collider
 from source.vector import Vector
 import source.maps as maps
+import random as rand
+
 
 class Interaction:
     def __init__(self, player):
@@ -53,18 +55,44 @@ class HudInteraction(Interaction):
         Interaction.__init__(self, player)
         self.hud = hud
 
-class MapInteraction():
-    def __init__(self, frame, init_level):
+class MapInteraction:
+    def __init__(self, frame, player):
         #TODO put level order/array in here
         self.frame = frame
-        self.current_level = init_level
+        self.player = player
+        self.level_array = [
+            [maps.LEVEL_GRID_6, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3],
+            [maps.LEVEL_GRID_1, maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_4],
+            [maps.LEVEL_GRID_5, maps.LEVEL_GRID_6, maps.LEVEL_GRID_1]
+        ]
+        #TODO assign patrol points to each map
+        self.map_patrol_points = {
+            "00" : [],
+            "01" : [],
+            "02" : [],
+            "10" : [],
+            "11" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "12" : [],
+            "20" : [],
+            "21" : [],
+            "22" : []
+        }
+        self.current_level = Level(self.level_array[1][1])
+        self.level_setup()
 
+    def level_setup(self):
+        self.enemies = self.current_level.get_enemies()
+        for enemy in self.enemies:
+            if rand.randint(0,1) == 0:
+                for i in self.level_array:
+                    for j in i:
+                        if j == self.current_level.get_level():
+                            enemy.set_patrol_points(self.map_patrol_points[str(self.level_array.index(i))+str(i.index(j))])
+            else:
+                enemy.set_patrol_points([self.player.movement.get_pos()])
+                enemy.set_target()
 
-
-
-'''
-hud interaction
-player interaction
-keyboard interaction
-map interaction
-'''
+    def draw(self, canvas):
+        self.current_level.draw(canvas)
+        for enemy in self.enemies:
+            enemy.draw(canvas)

@@ -13,12 +13,10 @@ from source.clock import Clock
 
 #TODO clean initialiser
 class Enemy (Collider, EnemyStats):
-    def __init__(self, radius, init_pos, target = None, patrol_points = None):
+    def __init__(self, init_pos, target = None, patrol_points = None):
         Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), 16, Vector(0, 0))
         EnemyStats.__init__(self)
-
         self.sprite = Spritesheet("source/images/basic_enemy.png", 1, 1)
-
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.target = target
         self.patrol_points = patrol_points
@@ -37,3 +35,13 @@ class Enemy (Collider, EnemyStats):
     def draw(self, canvas):
         self.update()
         self.sprite.draw(canvas, self.pos)
+
+    def set_patrol_points(self, points):
+        if self.target != None:
+            self.target = None
+        self.movement.set_patrol_points(points)
+
+    def set_target(self):
+        if self.patrol_points != None:
+            self.patrol_points = None
+        self.movement.set_target()

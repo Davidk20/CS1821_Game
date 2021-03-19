@@ -42,3 +42,6 @@ class EnemyMovement (Movement):
 
     def set_target(self):
         self.target = self.patrol_points[self.current_point]
+
+    def set_patrol_points(self, points):
+        self.patrol_points = points

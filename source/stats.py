@@ -1,5 +1,5 @@
 from source.clock import Clock
-
+import random
 
 class Stats:
     def __init__(self):
@@ -20,7 +20,7 @@ class Stats:
 
 
 class PlayerStats(Stats):
-    def __init__(self, speedMul):
+    def __init__(self, speedMul = 3):
         Stats.__init__(self)
         self.speed = self.speed * speedMul
         self.lives = 3
