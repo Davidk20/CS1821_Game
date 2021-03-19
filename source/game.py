@@ -59,6 +59,10 @@ class Game:
         for i in self.colliders:
             if self.player.hit(i):
                 self.player.bouncePlayer(i)
+            for enemy in self.enemies:
+                if enemy.hit(i):
+                    enemy.bouncePlayer(i)
+    
 
         for enemy in self.enemies:
             discard = []

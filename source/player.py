@@ -7,17 +7,17 @@ from source.clock import Clock
 from source.vector import Vector
 from source.movement import Movement
 from source.projectile import Projectile
-from source.collider import PlayerCollider
+from source.collider import SpriteCollider
 from source.stats import PlayerStats
 from source.spritesheet import Spritesheet
 import os, math
 
-class Player(PlayerCollider, PlayerStats):
+class Player(SpriteCollider, PlayerStats):
     def __init__(self, init_pos):
         PlayerStats.__init__(self)
         self.pos = Vector(init_pos[0],init_pos[1])
         self.movement = Movement(self.speed, self.pos)
-        PlayerCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
+        SpriteCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
         self.sprite = Spritesheet("source/images/player.png", 1, 1)
         #TODO move to movement
         self.rotation = 0
