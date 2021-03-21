@@ -18,7 +18,7 @@ class Player(SpriteCollider, PlayerStats):
         self.pos = Vector(init_pos[0],init_pos[1])
         self.movement = Movement(self.speed, self.pos)
         SpriteCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
-        self.sprite = Spritesheet("source/images/player.png", 1, 1)
+        self.sprite = Spritesheet("source/images/player.png", 3, 1)
         #TODO move to movement
         self.rotation = 0
 

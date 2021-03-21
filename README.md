@@ -13,3 +13,6 @@
   - This section should include instructions on how to run the program and some screenshots.
 
 - Open folder and run "main.py"
+
+
+# TODO List purpose of each file in the project
