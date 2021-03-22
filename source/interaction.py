@@ -62,26 +62,31 @@ class MapInteraction:
         self.frame = frame
         self.player = player
         self.level_array = [
-            [maps.LEVEL_GRID_6, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3],
-            [maps.LEVEL_GRID_1, maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_4],
-            [maps.LEVEL_GRID_5, maps.LEVEL_GRID_6, maps.LEVEL_GRID_1]
+            [maps.LEVEL_GRID_1, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3],
+            [maps.LEVEL_GRID_4, maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_5],
+            [maps.LEVEL_GRID_6, maps.LEVEL_GRID_7, maps.LEVEL_GRID_8]
         ]
+        self.memory = [1,1]
+        self.map_x = 1
+        self.map_y = 1
         #TODO assign patrol points to each map
         self.map_patrol_points = {
-            "00" : [],
-            "01" : [],
-            "02" : [],
-            "10" : [],
+            "00" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "01" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "02" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "10" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
             "11" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "12" : [],
-            "20" : [],
-            "21" : [],
-            "22" : []
+            "12" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "20" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "21" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "22" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)]
         }
-        self.current_level = Level(self.level_array[1][1])
+        self.current_level = Level(self.level_array[self.map_x][self.map_y])
         self.level_setup()
 
     def level_setup(self):
+        #TODO update wall colliders and enemy and doors
+        self.current_level = Level(self.level_array[self.map_x][self.map_y])
         self.enemies = self.current_level.get_enemies()
         for enemy in self.enemies:
             if rand.randint(0,1) == 0:
@@ -93,7 +98,44 @@ class MapInteraction:
                 enemy.set_patrol_points([self.player.movement.get_pos()])
                 enemy.set_target()
 
+    def update(self):
+        if self.changed():
+            self.level_setup()
+
+        if self.player.pos.get_p()[0] < 0:
+            if self.map_y > 0:
+                self.map_y -= 1
+                self.player.pos.add(Vector(715,0))
+                
+        if self.player.pos.get_p()[1] < 0:
+            if self.map_x > 0:
+                self.map_x -= 1
+                self.player.pos.add(Vector(0,715))
+
+        if self.player.pos.get_p()[0] > 720:
+            if self.map_y < 2:
+                self.map_y += 1
+                self.player.pos.add(Vector(-715,0))
+                
+        if self.player.pos.get_p()[1] > 720:
+            if self.map_x < 2:
+                self.map_x += 1
+                self.player.pos.add(Vector(0,-715))
+                
+
+    def changed(self):
+        if self.memory != [self.map_x, self.map_y]:
+            self.memory = [self.map_x, self.map_y]
+            return True
+        return False
+
     def draw(self, canvas):
+
+        self.update()
+        
         self.current_level.draw(canvas)
+
         for enemy in self.enemies:
             enemy.draw(canvas)
+
+            

@@ -16,13 +16,14 @@ class Level:
         self.CANVAS_HEIGHT = 720
         self.WALL = 1
         self.ENEMY = 2
+        self.DOOR = 3
+        self.memory = -1
         self.grid = grid
         self.grid_width = len(grid[0])
         self.grid_height = len(grid)
         self.cell_width = self.CANVAS_WIDTH // self.grid_width
         self.cell_height = self.CANVAS_HEIGHT // self.grid_height
         self.colliders = []
-        self.memory = -1
         self.enemy_array = []
         for y in range(self.grid_height):
             for x in range (self.grid_width):
@@ -34,6 +35,9 @@ class Level:
 
     def get_enemies(self):
         return self.enemy_array
+
+    def set_enemies(self, enemy_array):
+        self.enermy_array = enemy_array
 
     def get_level(self):
         return self.grid
@@ -87,6 +91,19 @@ class Level:
             return False
         
         return self.grid[y][x] == self.ENEMY
+
+    def is_door(self, x, y):
+        if x < 3:
+            return False
+        if x >= self.grid_width:
+            return False
+        if y < 3:
+            return False
+        if y >= self.grid_height:
+            return False
+        
+        return self.grid[y][x] == self.DOOR
+
 
     def listWalls(self):
         return self.colliders
