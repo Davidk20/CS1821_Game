@@ -43,7 +43,7 @@ class KeyboardInteraction(Interaction):
             self.player.can_shoot = False
             fire = Projectile(
                 self.player.pos.get_p(),
-                self.player.rotation,
+                self.player.movement.rotation,
                 4,
                 "blue"
                 )
@@ -68,12 +68,11 @@ class MapInteraction:
         self.memory = [1,1]
         self.map_x = 1
         self.map_y = 1
-        #TODO assign patrol points to each map
         self.map_patrol_points = {
             "00" : [Vector(100, 350), Vector(300, 450), Vector(420, 250), Vector(610, 410), Vector(620, 270)],
             "01" : [Vector(310, 310), Vector(410, 310), Vector(410, 410), Vector(310, 410)],
             "02" : [Vector(110, 110), Vector(350, 110), Vector(350, 350), Vector(110, 350), Vector(110, 610), Vector(610, 610), Vector(610, 350), Vector(110,350)],
-            "10" : [Vector(100, 100), Vector(610, 100), Vector(610, 610), Vector(110, 610), Vector(110, 350), Vector(610, 350), Vector(610, 100)],
+            "10" : [Vector(100, 100), Vector(620, 100), Vector(620, 620), Vector(100, 620), Vector(100, 350), Vector(620, 350), Vector(620, 100)],
             "11" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
             "12" : [Vector(100, 100), Vector(300, 350), Vector(600, 270), Vector(600, 450), Vector(100, 450), Vector(350, 350)],
             "20" : [Vector(350, 350), Vector(110, 350), Vector(350, 350), Vector(350, 610), Vector(350, 350), Vector(610, 350), Vector(350, 350), Vector(350, 110)],

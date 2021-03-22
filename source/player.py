@@ -10,7 +10,6 @@ from source.projectile import Projectile
 from source.collider import SpriteCollider
 from source.stats import PlayerStats
 from source.spritesheet import Spritesheet
-import os, math
 
 class Player(SpriteCollider, PlayerStats):
     def __init__(self, init_pos):
@@ -19,37 +18,7 @@ class Player(SpriteCollider, PlayerStats):
         self.movement = Movement(self.speed, self.pos)
         SpriteCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
         self.sprite = Spritesheet("source/images/player.png", 1, 1)
-        #TODO move to movement
-        self.rotation = 0
 
-
-    #TODO move into movement class
-    def rotate(self):
-        """
-        Rotates the player based off their velocity vector.
-        """
-        vel_vector = self.movement.vel_vector
-
-        if vel_vector.x > 0.1: # Moving right
-            self.rotation = math.pi / 2
-
-            if vel_vector.y > 0.1: # Moving down right
-                self.rotation = (3/4) * math.pi
-            elif vel_vector.y < -0.1: # Moving down left
-                self.rotation = math.pi / 4
-        elif vel_vector.x < -0.1: # Moving left
-            self.rotation = (3/2) * math.pi
-
-            if vel_vector.y > 0.1: # Moving down left
-                self.rotation = (5/4) * math.pi
-            elif vel_vector.y < -0.1: # Moving up left
-                self.rotation = (7/4) * math.pi
-        elif vel_vector.y > 0.1: # Moving down
-            self.rotation = math.pi
-        elif vel_vector.y < -0.1: # Moving up
-            self.rotation = 0
-
-    #TODO move to interaction class
     #updates values regarding player position
     def update(self):
         self.movement.update()
@@ -61,7 +30,7 @@ class Player(SpriteCollider, PlayerStats):
         if self.can_remove_life == False and Clock.transition(self.time_between_life_loss): # Time between player being able to lose life.
             self.can_remove_life = True
 
-    #TODO simplify and move to interaction class
+
     #function to draw the player
     def draw(self, canvas):
         self.update()
@@ -74,8 +43,7 @@ class Player(SpriteCollider, PlayerStats):
         for i in destroy:
             self.bullets.remove(i)
 
-
-        self.sprite.draw(canvas, self.pos, self.rotation)
+        self.sprite.draw(canvas, self.pos, self.movement.get_rotation())
         if Clock.transition(1):
             self.sprite.next_frame()
     

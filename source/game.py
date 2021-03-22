@@ -47,8 +47,7 @@ class Game:
         self.enemies = self.map.current_level.get_enemies()
         Clock.tick() # increment time in static clock class
         self.kbdInteraction.check_input()
-        #TODO move to movement
-        self.player.rotate()
+        self.player.movement.rotate()
         if not self.player.alive == True:
             Menu(self.frame, "died", self.player.get_score())
             return
@@ -72,7 +71,6 @@ class Game:
             for colliding_enemy in self.enemies:
                 if (enemy != colliding_enemy):
                     if (colliding_enemy.hit(enemy)):
-                        #TODO increase the bounce momentum upon collision?
                         colliding_enemy.bounceSprite(enemy)
             for i in discard:
                 self.enemies.remove(i)

@@ -111,7 +111,6 @@ class Level:
     def listWalls(self):
         return self.colliders
 
-#TODO move into overall interaction class
 class Interaction:
     def __init__(self, level):
         self.level = level

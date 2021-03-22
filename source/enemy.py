@@ -10,7 +10,6 @@ from source.stats import EnemyStats
 from source.spritesheet import Spritesheet
 from source.clock import Clock
 
-#TODO clean initialiser
 class Enemy (SpriteCollider, EnemyStats):
     def __init__(self, init_pos, target = None, patrol_points = None):
         self.sprite = Spritesheet("source/images/basic_enemy.png", 1, 1)
@@ -33,7 +32,7 @@ class Enemy (SpriteCollider, EnemyStats):
     #function to draw the enemy
     def draw(self, canvas):
         self.update()
-        self.sprite.draw(canvas, self.pos)
+        self.sprite.draw(canvas, self.pos, self.movement.get_rotation())
 
     def set_patrol_points(self, points):
         if self.target != None:

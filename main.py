@@ -139,5 +139,5 @@ class Menu:
 
 
 if __name__ == "__main__":
-    frame = simplegui.create_frame("Game", 720 , 720)
+    frame = simplegui.create_frame("Game", 720 , 720, 0)
     menu = Menu(frame, "start")
