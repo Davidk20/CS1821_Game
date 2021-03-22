@@ -70,15 +70,15 @@ class MapInteraction:
         self.map_y = 1
         #TODO assign patrol points to each map
         self.map_patrol_points = {
-            "00" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "01" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "02" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "10" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
+            "00" : [Vector(100, 350), Vector(300, 450), Vector(420, 250), Vector(610, 410), Vector(620, 270)],
+            "01" : [Vector(310, 310), Vector(410, 310), Vector(410, 410), Vector(310, 410)],
+            "02" : [Vector(110, 110), Vector(350, 110), Vector(350, 350), Vector(110, 350), Vector(110, 610), Vector(610, 610), Vector(610, 350), Vector(110,350)],
+            "10" : [Vector(100, 100), Vector(610, 100), Vector(610, 610), Vector(110, 610), Vector(110, 350), Vector(610, 350), Vector(610, 100)],
             "11" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "12" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "20" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "21" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)],
-            "22" : [Vector(210, 210), Vector(510, 210), Vector(510, 510), Vector(210, 510)]
+            "12" : [Vector(100, 100), Vector(300, 350), Vector(600, 270), Vector(600, 450), Vector(100, 450), Vector(350, 350)],
+            "20" : [Vector(350, 350), Vector(110, 350), Vector(350, 350), Vector(350, 610), Vector(350, 350), Vector(610, 350), Vector(350, 350), Vector(350, 110)],
+            "21" : [Vector(110, 610), Vector(270, 350), Vector(110, 110), Vector(350, 200), Vector(610, 110), Vector(450, 350), Vector(610, 610), Vector(350, 110)],
+            "22" : [Vector(350, 350), Vector(110, 110), Vector(350, 350), Vector(610, 110), Vector(350, 350), Vector(110, 610)]
         }
         self.current_level = Level(self.level_array[self.map_x][self.map_y])
         self.level_setup()
@@ -92,6 +92,7 @@ class MapInteraction:
                     for j in i:
                         if j == self.current_level.get_level():
                             enemy.set_patrol_points(self.map_patrol_points[str(self.level_array.index(i))+str(i.index(j))])
+                            enemy.movement.speed = 3
             else:
                 enemy.set_patrol_points([self.player.movement.get_pos()])
                 enemy.set_target()
