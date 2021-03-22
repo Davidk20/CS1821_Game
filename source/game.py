@@ -9,8 +9,7 @@ from source.keyboard import Keyboard
 from source.enemy import Enemy
 from source.level import Level
 from source.hud import Hud
-from source.wallcollider import WallCollider
-from source.collider import Collider
+from source.collider import Collider, WallCollider
 from source.vector import Vector
 from source.clock import Clock
 import source.maps as maps

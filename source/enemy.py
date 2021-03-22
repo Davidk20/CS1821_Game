@@ -3,9 +3,8 @@ try:
 except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from source.movement import Movement
+from source.movement import Movement, EnemyMovement
 from source.vector import Vector
-from source.enemy_movement import EnemyMovement
 from source.collider import SpriteCollider
 from source.stats import EnemyStats
 from source.spritesheet import Spritesheet

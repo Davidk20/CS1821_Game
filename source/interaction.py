@@ -9,8 +9,7 @@ from source.enemy import Enemy
 from source.level import Level
 from source.hud import Hud
 from source.projectile import Projectile
-from source.wallcollider import WallCollider
-from source.collider import Collider
+from source.collider import Collider, WallCollider
 from source.vector import Vector
 import source.maps as maps
 import random as rand
@@ -85,7 +84,6 @@ class MapInteraction:
         self.level_setup()
 
     def level_setup(self):
-        #TODO update wall colliders and enemy and doors
         self.current_level = Level(self.level_array[self.map_x][self.map_y])
         self.enemies = self.current_level.get_enemies()
         for enemy in self.enemies:
