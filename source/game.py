@@ -45,6 +45,7 @@ class Game:
 
     def update(self):
         self.colliders = self.map.current_level.listWalls()
+        self.enemies = self.map.current_level.get_enemies()
         Clock.tick() # increment time in static clock class
         self.kbdInteraction.check_input()
         #TODO move to movement
@@ -59,6 +60,9 @@ class Game:
 
         for enemy in self.enemies:
             discard = []
+            for collider in self.colliders:
+                if enemy.hit(collider):
+                    enemy.bounceSprite(collider)
             if self.player.hit(enemy):
                 self.player.bounceSprite(enemy)
                 self.player.set_life(-1)

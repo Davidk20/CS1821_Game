@@ -99,28 +99,30 @@ class MapInteraction:
                 enemy.set_target()
 
     def update(self):
-        if self.changed():
-            self.level_setup()
 
         if self.player.pos.get_p()[0] < 0:
             if self.map_y > 0:
                 self.map_y -= 1
                 self.player.pos.add(Vector(715,0))
+                self.level_setup()
                 
         if self.player.pos.get_p()[1] < 0:
             if self.map_x > 0:
                 self.map_x -= 1
                 self.player.pos.add(Vector(0,715))
+                self.level_setup()
 
         if self.player.pos.get_p()[0] > 720:
             if self.map_y < 2:
                 self.map_y += 1
                 self.player.pos.add(Vector(-715,0))
+                self.level_setup()
                 
         if self.player.pos.get_p()[1] > 720:
             if self.map_x < 2:
                 self.map_x += 1
                 self.player.pos.add(Vector(0,-715))
+                self.level_setup()
                 
 
     def changed(self):
