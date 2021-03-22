@@ -44,6 +44,7 @@ class Game:
         return [720,720]
 
     def update(self):
+        self.colliders = self.map.current_level.listWalls()
         Clock.tick() # increment time in static clock class
         self.kbdInteraction.check_input()
         #TODO move to movement
