@@ -104,7 +104,7 @@ class SpriteCollider(Collider):
                 normal = Vector(normal.x, 0).normalize()
             else:
                 normal = Vector(0, normal.y).normalize()
-            self.movement.vel_vector.add(normal.multiply(self.movement.speed))
+            self.movement.vel_vector.add(normal.multiply(self.movement.speed * 2))
 
 
 class WallCollider:
