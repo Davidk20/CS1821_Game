@@ -56,10 +56,10 @@ class HudInteraction(Interaction):
         self.hud = hud
 
 
-class MapInteraction:
+class MapInteraction(Interaction):
     def __init__(self, frame, player):
+        Interaction.__init__(self, player)
         self.frame = frame
-        self.player = player
         self.level_array = [
             [maps.LEVEL_GRID_1, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3],
             [maps.LEVEL_GRID_4, maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_5],
@@ -101,26 +101,22 @@ class MapInteraction:
         The update function determines when the player has crossed one of the thresholds
         and then accrodingly changes level and player location
         """
-        if self.player.pos.get_p()[0] < 0:
-            if self.map_y > 0:
+        if self.player.pos.get_p()[0] < 0 and self.map_y > 0:
                 self.map_y -= 1
                 self.player.pos.add(Vector(715,0))
                 self.level_setup()
                 
-        if self.player.pos.get_p()[1] < 0:
-            if self.map_x > 0:
+        if self.player.pos.get_p()[1] < 0 and self.map_x > 0:
                 self.map_x -= 1
                 self.player.pos.add(Vector(0,715))
                 self.level_setup()
 
-        if self.player.pos.get_p()[0] > 720:
-            if self.map_y < 2:
+        if self.player.pos.get_p()[0] > 720 and self.map_y < 2:
                 self.map_y += 1
                 self.player.pos.add(Vector(-715,0))
                 self.level_setup()
                 
-        if self.player.pos.get_p()[1] > 720:
-            if self.map_x < 2:
+        if self.player.pos.get_p()[1] > 720 and self.map_x < 2:
                 self.map_x += 1
                 self.player.pos.add(Vector(0,-715))
                 self.level_setup()
