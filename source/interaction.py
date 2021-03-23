@@ -137,5 +137,8 @@ class MapInteraction:
 
         for enemy in self.enemies:
             enemy.draw(canvas)
+        for pickup in self.current_level.pickup_array:
+            pickup.draw(canvas)
 
-            
+    def pickup(self, pickup):
+        self.current_level.pickup_array.remove(pickup)

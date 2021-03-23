@@ -83,6 +83,11 @@ class Game:
                 if i.hit(wall):
                     i.die()
 
+        for pickup in self.map.current_level.pickup_array:
+            if pickup.hit(self.player):
+                self.player.set_life(pickup.value)
+                self.map.pickup(pickup)
+
     #Function handling drawing of all shapes on screen
     def draw(self, canvas):
         self.update()

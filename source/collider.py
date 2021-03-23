@@ -107,6 +107,11 @@ class SpriteCollider(Collider):
             self.movement.vel_vector.add(normal.multiply(self.movement.speed * 5))
 
 
+class PickupCollider(Collider):
+    def __init__(self, pos):
+        Collider.__init__(self, "circ", pos, 32, pos)
+
+
 class WallCollider:
     def __init__(self, pos, ori):
         self.pos = pos

@@ -8,6 +8,8 @@ import source.maps as maps
 from source.collider import Collider
 from source.vector import Vector
 from source.enemy import Enemy
+from source.pickup import HealthPickup
+
 LEVELS_ARRAY = [maps.LEVEL_GRID_1, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3, maps.LEVEL_GRID_4, maps.LEVEL_GRID_5, maps.LEVEL_GRID_6]
 
 class Level:
@@ -17,6 +19,7 @@ class Level:
         self.WALL = 1
         self.ENEMY = 2
         self.DOOR = 3
+        self.LIFE = 4
         self.memory = -1
         self.grid = grid
         self.grid_width = len(grid[0])
@@ -26,6 +29,7 @@ class Level:
         self.colliders = []
         self.enemy_array = []
         self.door_array = []
+        self.pickup_array = []
         for y in range(self.grid_height):
             for x in range (self.grid_width):
                 if self.is_wall(x, y):
@@ -34,7 +38,8 @@ class Level:
                     self.enemy_array.append(Enemy([(x*self.cell_width)+(self.cell_width/2),(y*self.cell_height)+(self.cell_height/2)]))
                 if self.is_door(x, y):
                     self.door_array.append(Collider("wall", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
-
+                if self.is_life(x,y):
+                    self.draw_pickup(x, y)
 
     def get_enemies(self):
         return self.enemy_array
@@ -68,44 +73,34 @@ class Level:
             start_x = x * self.cell_width
             start_y = y * self.cell_height
 
-            canvas.draw_polygon([[start_x, start_y], [start_x + self.cell_width, start_y], [start_x + self.cell_width, start_y + self.cell_height], [start_x, start_y + self.cell_height]], 0, 'Yellow', 'Orange')
+            canvas.draw_polygon([[start_x, start_y], [start_x + self.cell_width, start_y], [start_x + self.cell_width, start_y + self.cell_height], [start_x, start_y + self.cell_height]], 0, '#64605F', '#64605F')
 
+    def draw_pickup(self, x, y):
+        if random.randint(0, 100) > 75:
+            pickup = HealthPickup(Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)))
+            self.pickup_array.append(pickup)
 
     def is_wall(self, x, y):
-        if x < 0:
+        if x < 0 or x >= self.grid_width or y < 0 or y >= self.grid_height:
             return False
-        if x >= self.grid_width:
-            return False
-        if y < 0:
-            return False
-        if y >= self.grid_height:
-            return False
-
-        return self.grid[y][x] == self.WALL
+        else:
+            return self.grid[y][x] == self.WALL
     
     def is_enemy_spawn(self, x, y):
-        if x < 2:
+        if x < 2 or x >= self.grid_width or y < 2 or y >= self.grid_height:
             return False
-        if x >= self.grid_width:
-            return False
-        if y < 2:
-            return False
-        if y >= self.grid_height:
-            return False
-        
-        return self.grid[y][x] == self.ENEMY
+        else:
+            return self.grid[y][x] == self.ENEMY
 
     def is_door(self, x, y):
-        if x < 3:
+        if x < 3 or x >= self.grid_width or y < 3 or y >= self.grid_height:
             return False
-        if x >= self.grid_width:
-            return False
-        if y < 3:
-            return False
-        if y >= self.grid_height:
-            return False
-        
-        return self.grid[y][x] == self.DOOR
+        else:
+            return self.grid[y][x] == self.DOOR
+
+
+    def is_life(self, x, y):      
+        return self.grid[y][x] == self.LIFE
 
 
     def listWalls(self):
