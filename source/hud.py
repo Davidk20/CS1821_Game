@@ -10,6 +10,9 @@ HEIGHT = 720
 
 class Hud:
     def __init__(self, player):
+        """
+        Simple inititaliser that loads hearts sprite and determines location of hud elements
+        """
         self.player = player
         self.lives = 3
 
@@ -28,20 +31,24 @@ class Hud:
         canvas.draw_image(self.hearts_img, self.hearts_centre, (self.hearts_img_width, self.hearts_img_height), (self.hearts_x, self.hearts_y), (self.hearts_img_width, self.hearts_img_height))
         canvas.draw_text('Score: ' + str(self.player.get_score()), (self.score_x, self.score_y), 28, 'White', 'sans-serif')
         
-        #TODO rewrite so that you can update with player.get_lives() rather than doing another calculation so that the draw function only handles drawing
-        #checks if health has depleted
         if self.lower_health():
             self.hit()
         if self.up_health():
             self.heal()
 
+    """
+    Checks if the player has either gained or lost lives making the hud update automatically
+    once the player object has lost or gained health
+    """
     def lower_health(self):
         return self.lives > self.player.get_lives()
 
     def up_health(self):
         return self.lives < self.player.get_lives()
 
-    #updates the image corresponding to health
+    """
+    Updates the image corresponding to health either cropping it or enlarging it
+    """
     def hit(self):
         if self.hearts_img_width >= 45:
             self.hearts_img_width -= 45

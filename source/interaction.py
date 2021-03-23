@@ -65,7 +65,6 @@ class MapInteraction:
             [maps.LEVEL_GRID_4, maps.LEVEL_GRID_CENTRE, maps.LEVEL_GRID_5],
             [maps.LEVEL_GRID_6, maps.LEVEL_GRID_7, maps.LEVEL_GRID_8]
         ]
-        self.memory = [1,1]
         self.map_x = 1
         self.map_y = 1
         self.map_patrol_points = {
@@ -96,8 +95,12 @@ class MapInteraction:
                 enemy.set_patrol_points([self.player.movement.get_pos()])
                 enemy.set_target()
 
+    
     def update(self):
-
+        """
+        The update function determines when the player has crossed one of the thresholds
+        and then accrodingly changes level and player location
+        """
         if self.player.pos.get_p()[0] < 0:
             if self.map_y > 0:
                 self.map_y -= 1
@@ -122,13 +125,6 @@ class MapInteraction:
                 self.player.pos.add(Vector(0,-715))
                 self.level_setup()
                 
-
-    def changed(self):
-        if self.memory != [self.map_x, self.map_y]:
-            self.memory = [self.map_x, self.map_y]
-            return True
-        return False
-
     def draw(self, canvas):
 
         self.update()
