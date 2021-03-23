@@ -8,7 +8,7 @@ import source.maps as maps
 from source.collider import Collider
 from source.vector import Vector
 from source.enemy import Enemy
-from source.pickup import HealthPickup
+from source.pickup import HealthPickup, BonusPickup
 
 LEVELS_ARRAY = [maps.LEVEL_GRID_1, maps.LEVEL_GRID_2, maps.LEVEL_GRID_3, maps.LEVEL_GRID_4, maps.LEVEL_GRID_5, maps.LEVEL_GRID_6]
 
@@ -20,6 +20,7 @@ class Level:
         self.ENEMY = 2
         self.DOOR = 3
         self.LIFE = 4
+        self.BONUS = 5
         self.memory = -1
         self.grid = grid
         self.grid_width = len(grid[0])
@@ -39,7 +40,9 @@ class Level:
                 if self.is_door(x, y):
                     self.door_array.append(Collider("wall", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
                 if self.is_life(x,y):
-                    self.draw_pickup(x, y)
+                    self.draw_health(x, y)
+                if self.is_bonus(x,y):
+                        self.draw_bonus(x, y)
 
     def get_enemies(self):
         return self.enemy_array
@@ -75,9 +78,14 @@ class Level:
 
             canvas.draw_polygon([[start_x, start_y], [start_x + self.cell_width, start_y], [start_x + self.cell_width, start_y + self.cell_height], [start_x, start_y + self.cell_height]], 0, '#64605F', '#64605F')
 
-    def draw_pickup(self, x, y):
-        if random.randint(0, 100) > 75:
+    def draw_health(self, x, y):
+        if random.randint(0, 100) > 60:
             pickup = HealthPickup(Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)))
+            self.pickup_array.append(pickup)
+
+    def draw_bonus(self, x, y):
+        if random.randint(0, 100) > 90:
+            pickup = BonusPickup(Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), 50)
             self.pickup_array.append(pickup)
 
     def is_wall(self, x, y):
@@ -102,6 +110,8 @@ class Level:
     def is_life(self, x, y):      
         return self.grid[y][x] == self.LIFE
 
+    def is_bonus(self, x, y):
+        return self.grid[y][x] == self.BONUS
 
     def listWalls(self):
         return self.colliders

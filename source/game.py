@@ -12,6 +12,7 @@ from source.hud import Hud
 from source.collider import Collider, WallCollider
 from source.vector import Vector
 from source.clock import Clock
+from source.pickup import HealthPickup, BonusPickup
 import source.maps as maps
 from source.interaction import KeyboardInteraction, MapInteraction
 
@@ -85,7 +86,10 @@ class Game:
 
         for pickup in self.map.current_level.pickup_array:
             if pickup.hit(self.player):
-                self.player.set_life(pickup.value)
+                if type(pickup) is HealthPickup:
+                    self.player.set_life(pickup.value)
+                elif type(pickup) is BonusPickup:
+                    self.player.set_score(pickup.value)
                 self.map.pickup(pickup)
 
     #Function handling drawing of all shapes on screen

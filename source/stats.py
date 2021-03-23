@@ -88,5 +88,5 @@ class ProjectileStats(Stats):
         return self.damage
 
 class PickupStats:
-    def __init__(self, value = 1):
-        self.value = value
+    def __init__(self, valueMul = 1):
+        self.value = 1 * valueMul
