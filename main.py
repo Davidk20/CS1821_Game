@@ -4,7 +4,6 @@ except ImportError :
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from source import game
-from leaderboard import Leaderboard
 
 class Mouse:
     def __init__(self):
@@ -69,7 +68,6 @@ class Menu:
     def __init__(self, frame, mode = "start", score = 0):
         self.frame = frame
         self.score = score
-        self.leaderboard = Leaderboard()
         self.mouse = Mouse()
         if mode == "start":
             self.draw_start()
@@ -85,24 +83,21 @@ class Menu:
         self.mode_text = "Python Game"
         self.score_text = " "
         self.startButton = Button("Start Game", "large", [150,200], self.frame)
-        self.lbButton = Button("Leaderboard", "large", [150,400], self.frame)
-        self.quitButton = Button("Quit", "large", [150, 600], self.frame)
-        self.buttons = [self.startButton, self.lbButton, self.quitButton]
+        self.quitButton = Button("Quit", "large", [150, 400], self.frame)
+        self.buttons = [self.startButton, self.quitButton]
 
-    def draw_game_over(self):
+    def draw_game_over(self): 
         self.mode_text = "GAME OVER"
         self.score_text = "You scored " + str(self.score) + " points!"
         self.restartButton = Button("Restart", "large", [150,250], self.frame)
-        self.lbButton = Button("Leaderboard", "large", [150,400], self.frame)
-        self.quitButton = Button("Quit", "large", [150, 550], self.frame)
-        self.buttons = [self.restartButton, self.lbButton, self.quitButton]
+        self.quitButton = Button("Quit", "large", [150, 400], self.frame)
+        self.buttons = [self.restartButton, self.quitButton]
 
 
     def draw_window(self):
         self.frame.set_draw_handler(self.draw)
         self.frame.set_mouseclick_handler(self.mouse.click_handler)
         self.frame.set_canvas_background("black")
-        #self.frame._display_fps_average = True
         self.frame.start()
 
 
