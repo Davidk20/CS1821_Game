@@ -36,7 +36,7 @@ class Player(SpriteCollider, PlayerStats):
         self.update()
         destroy = []
         for i in self.bullets:
-            if i.alive == False:
+            if i.alive == False or i.out_of_bounds():
                 destroy.append(i)
             else:
                 i.draw(canvas)
