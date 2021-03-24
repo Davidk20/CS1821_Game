@@ -9,7 +9,7 @@ from source.keyboard import Keyboard
 from source.enemy import Enemy
 from source.level import Level
 from source.hud import Hud
-from source.collider import Collider, WallCollider
+from source.collider import Collider
 from source.vector import Vector
 from source.clock import Clock
 from source.pickup import HealthPickup, BonusPickup

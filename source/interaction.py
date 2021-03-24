@@ -9,7 +9,7 @@ from source.enemy import Enemy
 from source.level import Level
 from source.hud import Hud
 from source.projectile import Projectile
-from source.collider import Collider, WallCollider
+from source.collider import Collider
 from source.vector import Vector
 import source.maps as maps
 import random as rand
