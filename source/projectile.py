@@ -36,7 +36,7 @@ class Projectile(Collider, ProjectileStats):
 
     def out_of_bounds(self):
         current_pos = self.pos.get_p()
-        if current_pos[0] > 700 or current_pos [0] < 0 or current_pos[1] > 700 or current_pos [1] < 0:
+        if current_pos[0] > 720 or current_pos [0] < 0 or current_pos[1] > 720 or current_pos [1] < 0:
             return True
         else:
             return False
