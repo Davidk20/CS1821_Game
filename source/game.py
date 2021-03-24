@@ -48,7 +48,6 @@ class Game:
         self.enemies = self.map.current_level.get_enemies()
         Clock.tick() # increment time in static clock class
         self.kbdInteraction.check_input()
-        self.player.movement.rotate()
         if not self.player.alive == True:
             Menu(self.frame, "died", self.player.get_score())
             return

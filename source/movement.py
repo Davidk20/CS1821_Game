@@ -48,7 +48,7 @@ class Movement:
 
     def update(self):
         self.vel_vector = Vector(self.check_out_range(self.vel_vector.x), self.check_out_range(self.vel_vector.y))
-
+        self.rotate()
         self.pos_vector.add(self.vel_vector)
         self.vel_vector.multiply(0.3) #Dampens movement when coming to stop
 
