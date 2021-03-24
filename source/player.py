@@ -17,7 +17,7 @@ class Player(SpriteCollider, PlayerStats):
         self.pos = Vector(init_pos[0],init_pos[1])
         self.movement = Movement(self.speed, self.pos)
         SpriteCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)
-        self.sprite = Spritesheet("source/images/player.png", 1, 1)
+        self.sprite = Spritesheet("source/images/player_sheet.png", 4, 2)
 
     #updates values regarding player position
     def update(self):
@@ -44,6 +44,6 @@ class Player(SpriteCollider, PlayerStats):
             self.bullets.remove(i)
 
         self.sprite.draw(canvas, self.pos, self.movement.get_rotation())
-        if Clock.transition(1):
+        if Clock.transition(10):
             self.sprite.next_frame()
     

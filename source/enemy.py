@@ -12,7 +12,7 @@ from source.clock import Clock
 
 class Enemy (SpriteCollider, EnemyStats):
     def __init__(self, init_pos, target = None, patrol_points = None):
-        self.sprite = Spritesheet("source/images/basic_enemy.png", 1, 1)
+        self.sprite = Spritesheet("source/images/enemy_sheet.png", 4, 2)
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
         self.target = target
         self.patrol_points = patrol_points
@@ -23,7 +23,7 @@ class Enemy (SpriteCollider, EnemyStats):
 
     #updates values regarding enemy position
     def update(self):
-        if Clock.transition(1):
+        if Clock.transition(10):
             self.sprite.next_frame()
         self.movement.patrol() # patrols enemy between a set of points
         self.movement.update() # updates enemy position

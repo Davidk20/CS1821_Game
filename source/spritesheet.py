@@ -9,7 +9,7 @@ class Spritesheet:
         self.num_cols = num_cols
 
         self.spritesheet = simplegui._load_local_image(file_path)
-        self.spritesheet_dimensions = [self.spritesheet.get_height(), self.spritesheet.get_height()]
+        self.spritesheet_dimensions = [self.spritesheet.get_width(), self.spritesheet.get_height()]
 
         self.frame_width = self.spritesheet_dimensions[0] / num_rows
         self.frame_height = self.spritesheet_dimensions[1] / num_cols
