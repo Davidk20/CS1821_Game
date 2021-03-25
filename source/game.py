@@ -20,6 +20,9 @@ from source.interaction import KeyboardInteraction, MapInteraction
 #TODO create a flush() method to clean dead sprites at the end
 
 class Game:
+    '''
+    Class handles the main game window and all interactions and drawing
+    '''
     def __init__(self, frame):
         self.frame = frame
         self.player = Player([350,350])
@@ -34,6 +37,9 @@ class Game:
         
     #Setup of SimpleGUI window
     def game_window_setup(self):
+        '''
+        method configures handlers for the game and starts the frame
+        '''        
         self.frame.set_canvas_background("#534a32")
         self.frame.set_keydown_handler(self.kbd.keyDown)
         self.frame.set_keyup_handler(self.kbd.keyUp)
@@ -41,9 +47,16 @@ class Game:
         self.frame.start()
 
     def get_dimensions(self):
+        '''
+        returns the dimensions of the game window
+        '''
         return [720,720]
 
     def update(self):
+        '''
+        method checks all interactions and objects and updates them,
+        moving positions or triggering collisions if required
+        '''
         self.colliders = self.map.current_level.listWalls()
         self.enemies = self.map.current_level.get_enemies()
         Clock.tick() # increment time in static clock class
@@ -93,6 +106,9 @@ class Game:
 
     #Function handling drawing of all shapes on screen
     def draw(self, canvas):
+        '''
+        method draws all active objects onto canvas
+        '''
         self.update()
         self.map.draw(canvas)
         self.player.draw(canvas)

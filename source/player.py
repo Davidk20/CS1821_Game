@@ -12,6 +12,9 @@ from source.stats import PlayerStats
 from source.spritesheet import Spritesheet
 
 class Player(SpriteCollider, PlayerStats):
+    '''
+    class handles all methods and variables associated with player
+    '''
     def __init__(self, init_pos):
         PlayerStats.__init__(self)
         self.pos = Vector(init_pos[0],init_pos[1])
@@ -21,6 +24,11 @@ class Player(SpriteCollider, PlayerStats):
 
     #updates values regarding player position
     def update(self):
+        '''
+        method updates players position and also checks to see if
+        the players can_shoot and can_remove_life booleans need
+        to be updated
+        '''
         self.movement.update()
         self.pos = self.movement.pos_vector
 
@@ -31,8 +39,12 @@ class Player(SpriteCollider, PlayerStats):
             self.can_remove_life = True
 
 
-    #function to draw the player
     def draw(self, canvas):
+        '''
+        method draws the player and any bullets fired by the player,
+        destroying any which are no longer active. The Spritesheet
+        frame is updated if enough time has passed.
+        '''
         self.update()
         destroy = []
         for i in self.bullets:

@@ -10,6 +10,9 @@ import math
 
 
 class Projectile(Collider, ProjectileStats):
+    '''
+    Class handles creation and management of all Projectiles
+    '''
     def __init__(self, init_pos, player_direction, radius, color):
         Collider.__init__(self, "circ", Vector(init_pos[0],init_pos[1]), radius)
         ProjectileStats.__init__(self)
@@ -35,6 +38,10 @@ class Projectile(Collider, ProjectileStats):
 
 
     def out_of_bounds(self):
+        '''
+        returns boolean based on whether or not the projectiles position
+        is out of the game window
+        '''
         current_pos = self.pos.get_p()
         if current_pos[0] > 720 or current_pos [0] < 0 or current_pos[1] > 720 or current_pos [1] < 0:
             return True
@@ -42,11 +49,18 @@ class Projectile(Collider, ProjectileStats):
             return False
 
     def get_vector(self, direction):
+        '''
+        returns the vector of the projectiles motion
+        '''
         new_vector = self.vectors[math.degrees(direction)]
         return new_vector.multiply(10)
 
 
     def draw(self, canvas):
+        '''
+        method draws the projectile and kills it if it is no longer
+        valid due to self.out_of_bounds()
+        '''
         if self.out_of_bounds():
             self.die()
         else:
@@ -60,4 +74,7 @@ class Projectile(Collider, ProjectileStats):
             )
 
     def update(self):
+        '''
+        method updates the projectiles position
+        '''        
         self.pos.add(self.vel)

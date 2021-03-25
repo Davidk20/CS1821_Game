@@ -16,21 +16,28 @@ import random as rand
 
 
 class Interaction:
+    '''
+    Base Interaction Class
+    '''
     def __init__(self, player):
         self.player = player
 
-class PlayerInteraction(Interaction):
-    def __init__(self, player):
-        Interaction.__init__(self, player)
-
 
 class KeyboardInteraction(Interaction):
+    '''
+    Class inherits from Interaction but is specialised for Keyboard object.
+    Links keyboard inputs to player movement
+    '''
     def __init__(self, player, keyboard):
         Interaction.__init__(self, player)
         self.keyboard = keyboard
 
     #function to check and control player movement
     def check_input(self):
+        '''
+        Method checks booleans from keyboard and triggers movement
+        based on keypress
+        '''
         if self.keyboard.left == True:
             self.player.movement.move_horizontal(-1) #move left
         if self.keyboard.right == True:
@@ -49,14 +56,11 @@ class KeyboardInteraction(Interaction):
                 )
             self.player.bullets.append(fire)
 
-class HudInteraction(Interaction):
-    #TODO setup HUD interaction
-    def __init__(self, player, hud):
-        Interaction.__init__(self, player)
-        self.hud = hud
-
 
 class MapInteraction(Interaction):
+    '''
+    Class inherits from Interaction but is specialised for Map class
+    '''
     def __init__(self, frame, player):
         Interaction.__init__(self, player)
         self.frame = frame
@@ -82,6 +86,10 @@ class MapInteraction(Interaction):
         self.level_setup()
 
     def level_setup(self):
+        '''
+        Method configures objects and variables for current level.
+        Configures enemy movement
+        '''
         self.current_level = Level(self.level_array[self.map_x][self.map_y])
         self.enemies = self.current_level.get_enemies()
         for enemy in self.enemies:
@@ -95,7 +103,7 @@ class MapInteraction(Interaction):
                 enemy.set_patrol_points([self.player.movement.get_pos()])
                 enemy.set_target()
 
-    
+
     def update(self):
         """
         The update function determines when the player has crossed one of the thresholds
@@ -122,7 +130,9 @@ class MapInteraction(Interaction):
                 self.level_setup()
                 
     def draw(self, canvas):
-
+        '''
+        Method draws all wall, enemy and pickup objects onto canvas
+        '''
         self.update()
         
         self.current_level.draw(canvas)
@@ -133,4 +143,8 @@ class MapInteraction(Interaction):
             pickup.draw(canvas)
 
     def pickup(self, pickup):
+        '''
+        method removes pickup from list once it has been picked up.
+        Removing it from draw queue and game.
+        '''
         self.current_level.pickup_array.remove(pickup)
