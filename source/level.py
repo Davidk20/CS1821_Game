@@ -25,17 +25,20 @@ class Level:
         self.LIFE = 4
         self.BONUS = 5
 
+        #Determines how to create the box image from the png
         self.box_img = simplegui._load_local_image("source/images/metal_box.png")
         self.box_img_width = self.box_img.get_width()
         self.box_img_height = self.box_img.get_height()
         self.box_img_centre = [self.box_img_width/2, self.box_img_height/2]
         
+        #Initiates useful variables to use in terms of creating a level from the 2d grid
         self.grid = grid
         self.grid_width = len(grid[0])
         self.grid_height = len(grid)
         self.cell_width = self.CANVAS_WIDTH // self.grid_width
         self.cell_height = self.CANVAS_HEIGHT // self.grid_height
 
+        #Initiates the arrays to which the elements present in the level are added
         self.colliders = []
         self.enemy_array = []
         self.door_array = []
