@@ -35,7 +35,7 @@ class Movement:
 
     def check_out_range(self, value):
         """
-        A clamping function which will ensure that the speed of the player does not exist the defined
+        A clamping function which will ensure that the speed of the player does not exceed the defined
         speed variable.
         """
 
@@ -94,7 +94,7 @@ class EnemyMovement (Movement):
         delta_x = self.target.x - self.pos_vector.x # difference in x plane
         delta_y = self.target.y - self.pos_vector.y # difference in y plane
 
-        if delta_x == 0 and delta_y == 0:
+        if delta_x == 0 and delta_y == 0: # ensures there are no division by 0 errors when normalising
             return
 
         target_vector = Vector(delta_x, delta_y).normalize() # normalised vector from delta x & delta y

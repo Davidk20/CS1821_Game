@@ -14,9 +14,9 @@ class Enemy (SpriteCollider, EnemyStats):
     def __init__(self, init_pos, target = None, patrol_points = None):
         self.sprite = Spritesheet("source/images/enemy_sheet.png", 4, 2)
         self.pos = Vector(init_pos[0],init_pos[1]) #sets the initial position of the enemy.
-        self.target = target
-        self.patrol_points = patrol_points
-        self.in_collision = False
+        self.target = target # sets initial enemy target, if there is one.
+        self.patrol_points = patrol_points # sets initial patrol points, if there are some.
+        self.in_collision = False # initial collision state.
         EnemyStats.__init__(self)
         self.movement = EnemyMovement(self.speed, self.pos, target = self.target, patrol_points = self.patrol_points)
         SpriteCollider.__init__(self, Vector(init_pos[0],init_pos[1]), self.movement)

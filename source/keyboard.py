@@ -5,12 +5,14 @@ except ImportError :
 
 class Keyboard:
     def __init__(self):
+        # boolean declarations
         self.left = False
         self.right = False
         self.up = False
         self.down = False
         self.space = False
 
+    # sets specific keys 'pressed' state to true if a particular input is detected.
     def keyDown(self, key):
         if key == simplegui.KEY_MAP['a'] or key == simplegui.KEY_MAP['left']:
             self.left = True
@@ -23,6 +25,7 @@ class Keyboard:
         elif key == simplegui.KEY_MAP['space']:
             self.space = True
 
+    # sets specific keys 'pressed' state to false if a particular input is detected.
     def keyUp(self, key):
         if key == simplegui.KEY_MAP['a'] or key == simplegui.KEY_MAP['left']:
             self.left = False

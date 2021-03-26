@@ -32,7 +32,7 @@ class Player(SpriteCollider, PlayerStats):
         self.movement.update()
         self.pos = self.movement.pos_vector
 
-        if self.can_shoot == False and Clock.transition(self.time_between_shots):
+        if self.can_shoot == False and Clock.transition(self.time_between_shots): # Time between player being able to shoot.
             self.can_shoot = True
 
         if self.can_remove_life == False and Clock.transition(self.time_between_life_loss): # Time between player being able to lose life.

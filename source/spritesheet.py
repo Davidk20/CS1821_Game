@@ -14,8 +14,8 @@ class Spritesheet:
         self.frame_width = self.spritesheet_dimensions[0] / num_rows
         self.frame_height = self.spritesheet_dimensions[1] / num_cols
 
-        self.current_frame = 1
-        self.current_col = 1
+        self.current_frame = 1 # sets initial animation frame
+        self.current_col = 1 
 
     def draw(self, canvas, pos_vector, rotation = 0, frame_index = None):
         if frame_index != None:
@@ -35,7 +35,9 @@ class Spritesheet:
         
         canvas.draw_image(self.spritesheet, center_source, width_height_source, pos_vector.get_p(), width_height_dest, rotation)
 
+    # increments the sprites frame
     def next_frame(self):
+        # resets current frame if the current frame exceeds the total number of frames.
         if (self.current_frame * self.current_col) + 1 > self.num_rows * self.num_cols:
             self.current_col = 1
             self.current_frame = 1
