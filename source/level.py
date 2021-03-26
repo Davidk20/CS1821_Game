@@ -47,11 +47,14 @@ class Level:
         for y in range(self.grid_height):
             for x in range (self.grid_width):
                 if self.is_wall(x, y):
-                    self.colliders.append(Collider("rect", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
+                    self.colliders.append(Collider("rect", Vector((x*self.cell_width)+(self.cell_width/2),
+                    (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
                 if self.is_enemy_spawn(x, y):
-                    self.enemy_array.append(Enemy([(x*self.cell_width)+(self.cell_width/2),(y*self.cell_height)+(self.cell_height/2)]))
+                    self.enemy_array.append(Enemy([(x*self.cell_width)+(self.cell_width/2),
+                    (y*self.cell_height)+(self.cell_height/2)]))
                 if self.is_door(x, y):
-                    self.door_array.append(Collider("wall", Vector((x*self.cell_width)+(self.cell_width/2), (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
+                    self.door_array.append(Collider("wall", Vector((x*self.cell_width)+(self.cell_width/2), 
+                    (y*self.cell_height)+(self.cell_height/2)), self.cell_height, self.cell_width))
                 if self.is_life(x,y):
                     self.draw_health(x, y)
                 if self.is_bonus(x,y):
